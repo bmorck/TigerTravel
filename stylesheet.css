@@ -26,6 +26,32 @@
   color: white;
 }
 
+.row {
+  max-width: 100%;
+}
+
+#left-container {
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #b3b3b3;
+}
+
+#right-container {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #b3b3b3;
+  max-width: 100%;
+}
+
+.right-header {
+  border-bottom: 2px solid #333;
+  text-align: center;
+}
+
 button {
   background-color: #333;
   color: white;
@@ -33,4 +59,8 @@ button {
 
 button:hover {
   background-color: #ff8f00;
+}
+
+#times {
+  width: 75px;
 }

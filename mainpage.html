@@ -17,45 +17,65 @@
 	  <a href="#">Active Listings</a>
 	  <a href="#">My Profile</a>
 	</div>
-	<div class="body" style="margin-top: 10px;">
-		<form action="/action_page.php">
-			<div class="row">
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="airport">Where to:</label>
-						<select name="airport">
-							<option value="seect">select one</option>
-							<option value="EWR">EWR</option>
-						    <option value="JFK">JFK</option>
-						    <option value="PHL">PHL</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="times">Where to:</label>
-						<input type="text" class="details-form" id="times" placeholder="for custom query">
-					</div>
+	<div class="body">
+		<div class="row">
+			<div class="col-sm-8" id="left-column">
+				<div class="container" id="left-container">
+					<form action="/action_page.php">
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label for="airport">Where to:</label>
+									<select name="airport">
+										<option value="seect">select one</option>
+										<option value="EWR">EWR</option>
+									    <option value="JFK">JFK</option>
+									    <option value="PHL">PHL</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="custom">Where to:</label>
+									<input type="text" class="details-form" id="custom" placeholder="for custom query">
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label for="date">Date:</label>
+									<input type="text" class="details-form" id="date" placeholder="mm/dd/yyyy">
+								</div>
+								<div class="form-group">
+									<button class="btn" style="color: white;">Submit Request</button>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label for="times">Times:</label>
+									<input type="text" class="details-form" id="times" placeholder="00:00">
+									<span> &#8594; </span>
+									<input type="text" class="details-form" id="times" placeholder="00:00">
+								</div>
+							</div>
+						</div>
+					</form>
 				</div>
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="date">Date:</label>
-						<input type="text" class="details-form" id="date" placeholder="mm/dd/yyyy">
+			</div>
+			<div class="col-sm-4" id="right-column">
+				<div class="container" id="right-container">
+					<div>
+						<h3 class="right-header">Current Request</h3>
+						<p>EWR Start - End mm/dd/yyyy</p>
 					</div>
-					<div class="form-group">
-						<button class="btn" style="color: white;">Submit Request</button>
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="times">Times:</label>
-						<input type="text" class="details-form" id="times" placeholder="00:00">
-						<span> &#8594; </span>
-						<input type="text" class="details-form" id="times" placeholder="00:00">
+					<div>
+						<h3 class="right-header">Current Group</h3>
+						<p> Shaurya Garg: email@princeton.edu<br>
+							Bobby Morck: email@princeton.edu<br>
+							Hanson Kang: email@princeton.edu<br>
+							Donovan Coronado: email@princeton.edu</p>
 					</div>
 				</div>
 			</div>
-		</form>
-	</div>
-	<b> 
+		</div>
+		<b> 
 		TigerTravel <br>
 		<br>
 		Team Members: <br>
@@ -67,5 +87,6 @@
 		Team Leader: Bobby Morck <br>
 		<br>
 		Team Advisor: Lance Goodridge <br>
-    </b>
+    	</b>
+	</div>
 </body>
