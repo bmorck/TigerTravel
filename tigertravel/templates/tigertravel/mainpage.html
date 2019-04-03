@@ -1,22 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
- 	<title>TigerTravel</title>
- 	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<link rel="stylesheet" type="text/css" href="stylesheet.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- </head>
-
-<body>
-	<div class="topnav">
-	  <a class="active" href="">Home</a>
-	  <a href="#">Active Groups</a>
-	  <a href="#">Active Listings</a>
-	  <a href="#">My Profile</a>
-	</div>
+{% extends "tigertravel/base.html" %}
+{% block content %}
 	<div class="body">
 		<div class="row">
 			<div class="col-sm-8" id="left-column">
@@ -89,4 +72,4 @@
 		Team Advisor: Lance Goodridge <br>
     	</b>
 	</div>
-</body>
+{% endblock content %}
