@@ -16,7 +16,7 @@ class RequestListView(ListView):
 	model = Request
 	template_name = 'tigertravel/about.html'
 	context_object_name = 'posts'
-	ordering = ['-date']
+	ordering = ['date']
 
 
 		
