@@ -23,6 +23,13 @@
 	  <a href="#">Active Listings</a>
 	  <a href="#">My Profile</a>
 	</div>
+	{% if messages %}
+		{% for message in messages %}
+			<div class="alert alert-{{ message.tags }}">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endif%}
 	{% block content %}{% endblock %}
 </body>
 </html>

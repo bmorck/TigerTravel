@@ -1,32 +1,26 @@
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
 
-# class Group(models.Model):
-# 	destination =
-# 	date =
-# 	start_time =
-# 	end_time =
-# 	members = models.ManytoMany?
+class Group(models.Model):
+	destination = models.CharField(max_length=50)
+	date = models.DateField()
+	start_time = models.TimeField()
+	end_time = models.TimeField()
+	members = models.ManyToManyField(User)
 
-# class Request(models.Model):
-# 	destination =
-# 	date =
-# 	start_time =
-# 	end_time =
-# 	person = models.ForeignKey(User)
+class Request(models.Model):
+	destination = models.CharField(max_length=50)
+	date = models.DateField()
+	start_time = models.TimeField()
+	end_time = models.TimeField()
+	person = models.ForeignKey(User, on_delete=models.CASCADE)
+
+	def get_absolute_url(self):
+		return reverse('tigertravel-about')
 
 # class User(models.Model):
-# 	user =
+# 	user = 
 # 	netid =
 # 	email =
-# 	photo = ?
-
-class Post(models.Model):
-	title = models.CharField(max_length=100)
-	content = models.TextField()
-	date_posted = models.DateTimeField(default=timezone.now)
-	author = models.ForeignKey(User, on_delete=models.CASCADE)
-
-	def __str__(self):
-		return self.title
+# 	photo = 

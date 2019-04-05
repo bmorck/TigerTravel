@@ -4,12 +4,13 @@
 		<div class="row">
 			<div class="col-sm-8" id="left-column">
 				<div class="container" id="left-container">
-					<form action="/action_page.php">
+					<form method="POST">
+						{% csrf_token %}
 						<div class="row">
 							<div class="col-sm-4">
-								<div class="form-group">
-									<label for="airport">Where to:</label>
-									<select name="airport">
+								<div id="div_id_destination" class="form-group">
+									<label for="id_destination" class="requiredField">Where to:</label>
+									<select name="destination" required id="id_destination">
 										<option value="select">select one</option>
 										<option value="EWR">EWR</option>
 									    <option value="JFK">JFK</option>
@@ -23,19 +24,19 @@
 							</div>
 							<div class="col-sm-4">
 								<div class="form-group">
-									<label for="date">Date:</label>
-									<input type="text" class="details-form" id="date" placeholder="mm/dd/yyyy">
+									<label for="id_date" class="requiredField">Date:</label>
+									<input type="date" class="details-form" name="date" required id="id_date" placeholder="mm/dd/yyyy">
 								</div>
 								<div class="form-group">
-									<button class="btn" style="color: white;">Submit Request</button>
+									<button class="btn" type="submit" style="color: white;">Submit Request</button>
 								</div>
 							</div>
 							<div class="col-sm-4">
 								<div class="form-group">
-									<label for="times">Times:</label>
-									<input type="text" class="details-form" id="times" placeholder="00:00">
+									<label for="id_start_time" class="requiredField">Times:</label>
+									<input type="time" class="details-form" name="start_time" required id="id_start_time">
 									<span> &#8594; </span>
-									<input type="text" class="details-form" id="times" placeholder="00:00">
+									<input type="time" class="details-form" name="end_time" required id="id_end_time">
 								</div>
 							</div>
 						</div>

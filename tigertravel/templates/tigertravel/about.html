@@ -1,8 +1,8 @@
 {% extends "tigertravel/base.html" %}
 {% block content %}
 	{% for post in posts %}
-		<h1>{{ post.title }}</h1>
-		<p>By {{ post.author }} on {{ post.date_posted|date:"F d, Y" }}</p>
-		<p>{{ post.content }}</p>
+		<h1>{{ post.person }}'s Trip on {{ post.date|date:"F d, Y" }}</h1>
+		<p>Departure Timeframe: {{ post.start_time }} - {{ post.end_time }} to {{ post.destination }}</p>
+		<p>Group TBD</p>
 	{% endfor %}
 {% endblock content %}
