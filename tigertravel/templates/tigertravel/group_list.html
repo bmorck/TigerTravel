@@ -3,6 +3,9 @@
 	{% for object in object_list %}
 		<h1>{{ object.destination }} {{ object.date|date:"F d, Y" }}</h1>
 		<p>Departure Timeframe: {{ object.start_time }} - {{ object.end_time }}</p>
-		<p>Group: {{ object.members }}</p>
+		<p>Group: {% for member in object.members.all %} {{ member }} {% endfor %}</p>
 	{% endfor %}
+	<script type="text/javascript">
+		document.getElementById('groups').classList.add('active');
+	</script>
 {% endblock content %}

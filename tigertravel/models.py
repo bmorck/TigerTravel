@@ -17,7 +17,7 @@ class Request(models.Model):
 	person = models.ForeignKey(User, on_delete=models.CASCADE)
 
 	def get_absolute_url(self):
-		return reverse('tigertravel-about')
+		return reverse('tigertravel-listings')
 
 # class User(models.Model):
 # 	user = 

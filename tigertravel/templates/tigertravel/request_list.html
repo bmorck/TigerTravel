@@ -1,8 +1,11 @@
 {% extends "tigertravel/base.html" %}
 {% block content %}
-	{% for post in posts %}
+	{% for post in object_list %}
 		<h1>{{ post.person }}'s Trip on {{ post.date|date:"F d, Y" }}</h1>
 		<p>Departure Timeframe: {{ post.start_time }} - {{ post.end_time }} to {{ post.destination }}</p>
 		<p>Group TBD</p>
 	{% endfor %}
+	<script type="text/javascript">
+		document.getElementById('listings').classList.add('active');
+	</script>
 {% endblock content %}
