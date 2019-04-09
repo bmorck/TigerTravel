@@ -25,7 +25,7 @@ SECRET_KEY = 'kc+!&_7jtgbq$g4!ue2-cww4%*cs-ni^@x+gmhytf438y&6k2s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tiger-travel.herokuapp.com']
 
 
 # Application definition
