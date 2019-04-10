@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['tiger-travel.herokuapp.com']
 
 INSTALLED_APPS = [
     'tigertravel.apps.TigertravelConfig',
+    'uniauth',
     'users.apps.UsersConfig',
     'crispy_forms',
     'django.contrib.admin',
@@ -85,6 +86,10 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'uniauth.backends.CASBackend',
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -128,3 +133,8 @@ STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 django_heroku.settings(locals())
+
+LOGIN_URL = "/accounts/login/"
+UNIAUTH_LOGIN_DISPLAY_STANDARD = False
+UNIAUTH_LOGOUT_CAS_COMPLETELY = True
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
