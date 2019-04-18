@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Request, Group
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 from django.contrib import messages
 
 class RequestCreateView(CreateView):
@@ -10,6 +10,7 @@ class RequestCreateView(CreateView):
 
 	def form_valid(self, form):
 		form.instance.person = self.request.user
+		form.instance.name = self.request.user.profile.get_display_id()
 		return super().form_valid(form)
 
 	def get_success_url(self):
@@ -44,9 +45,15 @@ class RequestListView(ListView):
 	context_object_name = 'posts'
 	ordering = ['date']
 
+
 class GroupListView(ListView):
 	model = Group
 	ordering = ['date']
+
+class GroupDetailView(DetailView):
+	model = Group
+
+
 
 
 		

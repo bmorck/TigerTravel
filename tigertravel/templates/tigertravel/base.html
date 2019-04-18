@@ -21,7 +21,7 @@
 	  <a class="" href="{% url 'tigertravel-home' %}" id="home">Home</a>
 	  <a class="" href="{% url 'tigertravel-groups' %}" id="groups">Active Groups</a>
 	  <a class="" href="{% url 'tigertravel-listings' %}" id="listings">Active Listings</a>
-	  <a class="" href="#">My Profile</a>
+	  <a class="" href="{% url 'tigertravel-profile' %}">My Profile</a>
 	</div>
 	{% if messages %}
 		{% for message in messages %}

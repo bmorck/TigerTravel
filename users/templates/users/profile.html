@@ -1,0 +1,23 @@
+{% extends "tigertravel/base.html" %}
+{% block content %}
+	<meta id="my-data" data-name="{{ user.profile.get_display_id }}" data-other="{{other}}">
+	<div id="prof" class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="https://tigerbook.herokuapp.com/images/name">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.profile.get_display_id}}</h2>
+          <p class="text-secondary">{{ user.username }}</p>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+	var name= "{{ user.profile.get_display_id }}";
+    $(function(){
+       $('#prof').find('img').each(function(){
+           var srcpath = $(this).attr('src');
+           srcpath = srcpath.replace('name',name);
+           $(this).attr('src',srcpath);
+       });
+    });
+</script>
+{% endblock content %}

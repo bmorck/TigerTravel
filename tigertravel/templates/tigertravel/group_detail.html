@@ -1,0 +1,24 @@
+{% extends "tigertravel/base.html" %}
+{% block content %}
+	<h1>Group Page </h1>
+	<h2>{{ object.destination }} {{ object.date|date:"F d, Y" }}</h2>
+	<p>Departure Timeframe: {{ object.start_time }} - {{ object.end_time }}</p>
+	<p>Group: {% for member in object.members.all %} {{ member.profile.get_display_id }} {% endfor %}</p>
+	<p>Group: {% for member in object.members.all %} 
+		<img class="rounded-circle account-img" src="https://tigerbook.herokuapp.com/images/name">
+	 {% endfor %}</p>
+	<script type="text/javascript">
+		document.getElementById('groups').classList.add('active');
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+	var name= "{{ user.profile.get_display_id }}";
+    $(function(){
+       $('#prof').find('img').each(function(){
+           var srcpath = $(this).attr('src');
+           srcpath = srcpath.replace('name',name);
+           $(this).attr('src',srcpath);
+       });
+    });
+</script>
+{% endblock content %}
