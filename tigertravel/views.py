@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .models import Request, Group
 from django.views.generic import CreateView, ListView, DetailView
 from django.contrib import messages
+import datetime
+from django.shortcuts import redirect
 
 class RequestCreateView(CreateView):
 	model = Request
@@ -9,9 +11,30 @@ class RequestCreateView(CreateView):
 	template_name = 'tigertravel/mainpage.html'
 
 	def form_valid(self, form):
-		form.instance.person = self.request.user
-		form.instance.name = self.request.user.profile.get_display_id()
-		return super().form_valid(form)
+		if form.instance.date.year > datetime.datetime.now().year:
+			form.instance.person = self.request.user
+			form.instance.name = self.request.user.profile.get_display_id()
+			return super().form_valid(form)
+
+		elif form.instance.date.year == datetime.datetime.now().year:
+			if form.instance.date.month > datetime.datetime.now().month:
+				form.instance.person = self.request.user
+				form.instance.name = self.request.user.profile.get_display_id()
+				return super().form_valid(form)
+
+			elif form.instance.date.month == datetime.datetime.now().month:
+				if form.instance.date.day >= datetime.datetime.now().day:
+					form.instance.person = self.request.user
+					form.instance.name = self.request.user.profile.get_display_id()
+					return super().form_valid(form)
+				else:
+					return redirect('tigertravel-home')
+
+			else:
+				return redirect('tigertravel-home')
+
+		else:	
+			return redirect('tigertravel-home')
 
 	def get_success_url(self):
 		changed = False
@@ -28,7 +51,9 @@ class RequestCreateView(CreateView):
 					if self.object.end_time < group.end_time:
 						group.end_time = self.object.end_time
 					# adds member
-					group.members.add(self.object.person)
+
+					#CHANGED
+					group.members.add(self.object)
 					group.save()
 					break
 		# if no group intersects, create new one
@@ -36,7 +61,9 @@ class RequestCreateView(CreateView):
 			new_group = Group.objects.create(destination=self.object.destination, 
 				date=self.object.date, start_time=self.object.start_time,
 				end_time=self.object.end_time)
-			new_group.members.add(self.object.person)
+
+			#CHANGED
+			new_group.members.add(self.object)
 			new_group.save()
 		return super().get_success_url()
 
