@@ -143,4 +143,16 @@ UNIAUTH_LOGOUT_CAS_COMPLETELY = True
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 import django_heroku
-django_heroku.settings(locals())    
+django_heroku.settings(locals())   
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = 'tigertravel333@gmail.com'
+
+EMAIL_HOST_PASSWORD = '3Tiger3Travel3'
+
+EMAIL_USE_SSL = False
+
+EMAIL_USE_TLS = True 

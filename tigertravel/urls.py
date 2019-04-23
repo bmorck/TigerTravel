@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RequestCreateView, RequestListView, GroupListView, GroupDetailView
+from .views import RequestCreateView, RequestListView, GroupListView, GroupDetailView, RequestDeleteView
 from . import views
 from uniauth.decorators import login_required
 from users import views as user_views
@@ -10,5 +10,7 @@ urlpatterns = [
     path('groups/', login_required(GroupListView.as_view()), name='tigertravel-groups'),
     path('groups/<int:pk>', login_required(GroupDetailView.as_view()), name='group-detail'),
     path('profile/', user_views.profile, name='tigertravel-profile'),
+    path('delete/<int:pk>', login_required(RequestDeleteView.as_view()), name='request-delete'),
+    
 
 ]

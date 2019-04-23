@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from .models import Request, Group
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, DeleteView
 from django.contrib import messages
 import datetime
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.contrib import messages
+from django.core.mail import send_mail
 
 class RequestCreateView(CreateView):
 	model = Request
@@ -11,6 +14,12 @@ class RequestCreateView(CreateView):
 	template_name = 'tigertravel/mainpage.html'
 
 	def form_valid(self, form):
+
+		for request in Request.objects.all():
+			if self.request.user == request.person and form.instance.date == request.date:
+				messages.error(self.request, 'You cannot have two trip requests for the same date!')
+				return redirect('tigertravel-home')
+
 		if form.instance.date.year > datetime.datetime.now().year:
 			form.instance.person = self.request.user
 			form.instance.name = self.request.user.profile.get_display_id()
@@ -23,39 +32,83 @@ class RequestCreateView(CreateView):
 				return super().form_valid(form)
 
 			elif form.instance.date.month == datetime.datetime.now().month:
-				if form.instance.date.day >= datetime.datetime.now().day:
+				if form.instance.date.day > datetime.datetime.now().day:
 					form.instance.person = self.request.user
 					form.instance.name = self.request.user.profile.get_display_id()
 					return super().form_valid(form)
+
+				elif form.instance.date.day == datetime.datetime.now().day:
+					if form.instance.start_time > datetime.datetime.now().time():
+						form.instance.person = self.request.user
+						form.instance.name = self.request.user.profile.get_display_id()
+						return super().form_valid(form)
+
+					else:
+						messages.error(self.request, 'You cannot schedule a trip in the past (Time)!')
+						return redirect('tigertravel-home')
+
+
+
 				else:
+					messages.error(self.request, 'You cannot schedule a trip in the past (Day)!')
 					return redirect('tigertravel-home')
 
 			else:
+				messages.error(self.request, 'You cannot schedule a trip in the past! (Month)')
 				return redirect('tigertravel-home')
 
 		else:	
+			messages.error(self.request, 'You cannot schedule a trip in the past! (Year)')
 			return redirect('tigertravel-home')
 
 	def get_success_url(self):
+		for group in Group.objects.all():
+			if group.date < datetime.datetime.now().date():
+				group.delete()
+
+			elif group.date == datetime.datetime.now().date():
+				if group.start_time < datetime.datetime.now().time():
+					group.delete()
+
 		changed = False
 		for group in Group.objects.all():
 			if group.date == self.object.date and group.destination == self.object.destination:
 				if self.object.end_time > group.start_time and self.object.start_time < group.end_time:
+					if len(group.members.all()) < 6:
 
-					# WORK ON MAX NUMBER AND UPDATE LISTING INSTEAD OF ADDING NEW
+						changed = True
+						# updates time range
+						if self.object.start_time > group.start_time:
+							group.start_time = self.object.start_time
+						if self.object.end_time < group.end_time:
+							group.end_time = self.object.end_time
+						# adds member
 
-					changed = True
-					# updates time range
-					if self.object.start_time > group.start_time:
-						group.start_time = self.object.start_time
-					if self.object.end_time < group.end_time:
-						group.end_time = self.object.end_time
-					# adds member
+						#CHANGED
+						group.members.add(self.object)
+						group.save()
+						email_list = []
 
-					#CHANGED
-					group.members.add(self.object)
-					group.save()
-					break
+						for member in group.members.all():
+							email_list.append(member.person.email)
+
+						message = 'Your group has been changed! ' + self.object.person.first_name + ' has joined your trip to ' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture from princeton is scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
+
+						send_mail(
+
+						'Your TigerTravel Group', 
+
+						message, 
+
+						'tigertravel333@gmail.com',
+
+						email_list,
+
+						fail_silently=False,
+
+						)
+						break
+
 		# if no group intersects, create new one
 		if changed == False:
 			new_group = Group.objects.create(destination=self.object.destination, 
@@ -65,6 +118,23 @@ class RequestCreateView(CreateView):
 			#CHANGED
 			new_group.members.add(self.object)
 			new_group.save()
+
+			message = 'You have created a new group! You will be emailed when other people join!\nYour trip is scheduled to ' + new_group.destination + ' on ' + new_group.date.strftime("%A %d, %B %Y") + '.\n' + 'Departure from princeton is scheduled between ' + new_group.start_time.strftime('%I:%M %p') + ' and ' + new_group.end_time.strftime('%I:%M %p')
+
+			send_mail(
+
+			'Your TigerTravel Group', 
+
+			message, 
+
+			'tigertravel333@gmail.com',
+
+			[self.object.person.email],
+
+			fail_silently=False,
+
+			)
+
 		return super().get_success_url()
 
 class RequestListView(ListView):
@@ -77,8 +147,71 @@ class GroupListView(ListView):
 	model = Group
 	ordering = ['date']
 
+	def get_context_data(self):
+		for group in Group.objects.all():
+			if group.date > datetime.datetime.now().date():
+				return super().get_context_data()
+
+			elif group.date == datetime.datetime.now().date():
+
+				if group.start_time >= datetime.datetime.now().time():
+					return super().get_context_data()
+
+				else:
+					for request in group.members.all():
+						request.delete()
+					group.delete()
+					return super().get_context_data()
+
+			return super().get_context_data()
+
 class GroupDetailView(DetailView):
 	model = Group
+
+class RequestDeleteView(DeleteView):
+	model = Request
+	success_url = reverse_lazy('tigertravel-listings')
+
+	def delete(self, *args, **kwargs):
+		group = self.get_object().group_set.first()
+
+		if (group.members.first() == self.get_object()):
+			max = group.members.last().start_time
+
+		else:
+			max = group.members.first().start_time
+
+		for i in group.members.all():
+			if i.start_time > max and i != self.get_object():
+				max = i.start_time
+		group.start_time = max
+		group.save()
+
+
+		if (group.members.first() == self.get_object()):
+			min = group.members.last().end_time
+
+		else:
+			min = group.members.first().end_time
+
+		for i in group.members.all():
+			if i.end_time < min and i != self.get_object():
+				min = i.end_time
+		group.end_time = min
+		group.save()
+
+		if len(group.members.all()) == 1:
+			group.delete()
+
+		return super(RequestDeleteView, self).delete(*args, **kwargs)
+
+
+
+
+
+
+
+
 
 
 
