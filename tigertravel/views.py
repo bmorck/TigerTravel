@@ -149,21 +149,11 @@ class GroupListView(ListView):
 
 	def get_context_data(self):
 		for group in Group.objects.all():
-			if group.date > datetime.datetime.now().date():
-				return super().get_context_data()
-
-			elif group.date == datetime.datetime.now().date():
-
-				if group.start_time >= datetime.datetime.now().time():
-					return super().get_context_data()
-
-				else:
+			if group.date == datetime.datetime.now().date() and group.start_time < datetime.datetime.now().time():
 					for request in group.members.all():
 						request.delete()
 					group.delete()
-					return super().get_context_data()
-
-			return super().get_context_data()
+		return super().get_context_data()
 
 class GroupDetailView(DetailView):
 	model = Group
