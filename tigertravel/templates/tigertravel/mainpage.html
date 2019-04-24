@@ -1,86 +1,95 @@
 
+
 {% extends "tigertravel/base.html" %}
+
 {% block content %}
-<div class="body">
-	<div class="row">
-		<div class="col-sm-8 col" id="left-column">
-			<div class="container" id="left-container">
-				<form method="POST">
-					<div class="form-group">
-					{% csrf_token %}
-						<div class="row">
-							<div class="col-sm-4">
-								<div id="div_id_destination" class="form-group">
-									<label for="id_destination" class="requiredField">Destination (option 1):</label>
-									<select name="destination" required id="id_destination">
-										<option value="" disabled select>select one</option>
-										<option value="EWR">EWR</option>
-										<option value="JFK">JFK</option>
-										<option value="PHL">PHL</option>
-									</select>
-								</div>
 
-								
-								
+<div class="container-contact100" style="background-image: url('../../static/tigertravel/images/orange5.png');">
 
-								
-							
-							<div class="col-sm-4">
-								<div class="form-group">
-									<label for="id_date" class="requiredField">Date:</label>
-									<input type="date" class="details-form" name="date" required id="id_date" placeholder="mm/dd/yyyy">
-								</div>
-								<div class="form-group">
-									<button class="btn" type="submit" style="color: white;">Submit Request</button>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group">
-									<label for="id_start_time" class="requiredField">Times:</label>
-									<input type="time" class="details-form" name="start_time" required id="id_start_time">
-									<span> &#8594; </span>
-									<input type="time" class="details-form" name="end_time" required id="id_end_time">
-								</div>
-							</div>
-						
+	<div class="contact100-map" id="google_map" data-map-x="40.722047" data-map-y="-73.986422" data-pin="images/icons/map-marker.png" data-scrollwhell="0" data-draggable="1"></div>
 
-						</div>
+	<div class="contact100-more" style="background-color: #ba5b12">
+
+		TigerTravel
+
+	</div>
+
+	<div class="wrap-contact100">
+
+		<form method="POST" class="contact100-form validate-form">
+
+			{% csrf_token %}
+
+				<div id="div_id_destination" class="wrap-input100 validate-input">
+
+					<span class="label-input100">Destination</span>
+
+					<select name="destination" class="input100" required id="id_destination">
+
+						<option value="select">select one</option>
+
+						<option value="EWR">EWR</option>
+
+						<option value="JFK">JFK</option>
+
+						<option value="PHL">PHL</option>
+
+					</select>
+
+					<span class="focus-input100"></span>
+
+				</div>
+
+				<div class="wrap-input100 validate-input">
+
+					<span class="label-input100">Date</span>
+
+					<input type="date" class="details-form" name="date" required id="id_date" placeholder="mm/dd/yyyy">
+
+					<span class="focus-input100"></span>
+
+				</div>
+
+				<div class="wrap-input100 validate-input">
+
+					<span class="label-input100">Times</span>
+
+					<input type="time" class="details-form" name="start_time" required id="id_start_time">
+
+					<span> &#8594; </span>
+
+					<input type="time" class="details-form" name="end_time" required id="id_end_time">
+
+					<span class="focus-input100"></span>
+
+				</div>
+
+				<div class="container-contact100-form-btn">
+
+					<div class="wrap-contact100-form-btn">
+
+						<div class="contact100-form-bgbtn"></div>
+
+						<button class="contact100-form-btn" type="submit">
+
+							Submit Request
+
+						</button>
+
 					</div>
 
-				</form>
-			</div>
-		</div>
-		<div class="col-sm-4" id="right-column">
-			<div class="container" id="right-container">
-				<div>
-					<h3 class="right-header">Current Request</h3>
-					<p>EWR Start - End mm/dd/yyyy</p>
 				</div>
-				<div>
-					<h3 class="right-header">Current Group</h3>
-					<p> Shaurya Garg: email@princeton.edu<br>
-						Bobby Morck: email@princeton.edu<br>
-						Hanson Kang: email@princeton.edu<br>
-					Donovan Coronado: email@princeton.edu</p>
-				</div>
-			</div>
-		</div>
+
+		</form>
+
 	</div>
-	<b> 
-		TigerTravel <br>
-		<br>
-		Team Members: <br>
-		Bobby Morck <br>
-		Donovan Coronado <br>
-		Shaurya Garg <br>
-		Hanson Kang <br>
-		<br>
-		Team Leader: Bobby Morck <br>
-		<br>
-		Team Advisor: Lance Goodridge <br>
-	</b>
+
 </div>
+
 <script type="text/javascript">
+
 	document.getElementById('home').classList.add('active');
+
 </script>
+
 {% endblock content %}

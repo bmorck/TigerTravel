@@ -1,35 +1,117 @@
 {% load static %}
+
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
 
+
+
 	<meta charset="utf-8">
+
   	<meta name="viewport" content="width=device-width, initial-scale=1">
+
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
   	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/stylesheet.css' %}">
+
+<!--===============================================================================================-->
+
+	<link rel="icon" type="image/png" href="{% static 'tigertravel/images/icons/favicon.ico' %}"/>
+
+<!--===============================================================================================-->
+
+	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/vendor/bootstrap/css/bootstrap.min.css' %}">
+
+<!--===============================================================================================-->
+
+	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+
+<!--===============================================================================================-->
+
+	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+
+<!--===============================================================================================-->
+
+	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+
+<!--===============================================================================================-->
+
+	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/vendor/animate/animate.css' %}">
+
+<!--===============================================================================================-->
+
+	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/vendor/css-hamburgers/hamburgers.min.css' %}">
+
+<!--===============================================================================================-->
+
+	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/vendor/animsition/css/animsition.min.css' %}">
+
+<!--===============================================================================================-->
+
+	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/vendor/select2/select2.min.css' %}">
+
+<!--===============================================================================================-->
+
+	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/vendor/daterangepicker/daterangepicker.css' %}">
+
+<!--===============================================================================================-->
+
+	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/css/util.css' %}">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/css/main.css' %}">
+
+<!--===============================================================================================-->
+
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+
 	{% if title %}
+
 		<title>Django TigerTravel - {{ title }}</title>
+
 	{% else %}
+
 		<title>Django TigerTravel</title>
+
 	{% endif %}
+
 </head>
+
 <body>
+
 	<div class="topnav">
+
 	  <a class="" href="{% url 'tigertravel-home' %}" id="home">Home</a>
+
 	  <a class="" href="{% url 'tigertravel-groups' %}" id="groups">Active Groups</a>
+
 	  <a class="" href="{% url 'tigertravel-listings' %}" id="listings">Active Listings</a>
+
 	  <a class="" href="{% url 'tigertravel-profile' %}">My Profile</a>
+
 	</div>
+
 	{% if messages %}
+
 		{% for message in messages %}
+
 			<div class="alert alert-{{ message.tags }}">
+
 				{{ message }}
+
 			</div>
+
 		{% endfor %}
+
 	{% endif%}
+
 	{% block content %}{% endblock %}
+
 </body>
+
 </html>
