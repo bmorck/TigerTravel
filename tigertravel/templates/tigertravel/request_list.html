@@ -1,10 +1,12 @@
 {% extends "tigertravel/base.html" %}
 {% block content %}
 	{% for post in object_list %}
+		{% if post.person == user %}
 		<a class="btn" href="{% url 'request-delete' post.id %}">Delete</a>
 		<h1>{{ post.name }}'s Trip on {{ post.date|date:"F d, Y" }}</h1>
 		<p>Departure Timeframe: {{ post.start_time }} - {{ post.end_time }} to {{ post.destination }}</p>
 		<p>Group TBD</p>
+		{% endif %}
 	{% endfor %}
 	<script type="text/javascript">
 		document.getElementById('listings').classList.add('active');
