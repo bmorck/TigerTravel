@@ -136,6 +136,7 @@ class RequestCreateView(CreateView):
 			gmailUser = 'tigertravel333@gmail.com'
 			gmailPassword = '3Tiger3Travel3'
 			recipient = 'shauryag@princeton.edu'
+			print(self.object.person.email)
 			msg = MIMEMultipart()
 			msg['From'] = gmailUser
 			msg['To'] = recipient
