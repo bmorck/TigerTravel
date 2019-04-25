@@ -102,25 +102,16 @@ class RequestCreateView(CreateView):
 						email_list = []
 
 						for member in group.members.all():
+							email_list.append(member.person.profile.get_display_id() + '@princeton.edu')
 
-							message = 'Your group has been changed! ' + self.request.user.profile.get_display_id() + ' has joined your trip from ' + group.origin + 'to ' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture is scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
-
-							gmailUser = 'tigertravel333@gmail.com'
-							gmailPassword = '3Tiger3Travel3'
-							recipient = member.person.profile.get_display_id() + '@princeton.edu'
-							msg = MIMEMultipart()
-							msg['From'] = gmailUser
-							msg['To'] = recipient
-							msg['Subject'] = "New Group"
-							msg.attach(MIMEText(message))
-
-							mailServer = smtplib.SMTP('smtp.gmail.com', 587)
-							mailServer.ehlo()
-							mailServer.starttls()
-							mailServer.ehlo()
-							mailServer.login(gmailUser, gmailPassword)
-							mailServer.sendmail(gmailUser, recipient, msg.as_string())
-							mailServer.close()
+						message = 'Your group has been changed! ' + self.request.person.profile.get_display_id() + ' has joined your trip from ' + group.origin + 'to ' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture is scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
+						send_mail(
+						'Your TigerTravel Group',
+						message, 
+						'tigertravel333@gmail.com',
+						email_list,
+						fail_silently=False,
+						)
 						break
 
 		# if no group intersects, create new one
@@ -211,9 +202,9 @@ class RequestDeleteView(DeleteView):
 
 		for member in group.members.all():
 			if member != self.get_object():
-				email_list.append(member.person.email)
+				email_list.append(member.person.profile.get_display_id() + '@princeton.edu')
 
-		message = 'Your group has been changed! ' + self.request.user.profile.get_display_id() + ' has left your trip from ' + group.origin + 'to' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture is now scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
+		message = 'Your group has been changed! ' + self.request.person.profile.get_display_id() + ' has left your trip from ' + group.origin + 'to' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture is now scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
 
 		send_mail(
 
