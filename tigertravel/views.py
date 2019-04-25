@@ -204,7 +204,7 @@ class RequestDeleteView(DeleteView):
 			if member != self.get_object():
 				email_list.append(member.person.profile.get_display_id() + '@princeton.edu')
 
-		message = 'Your group has been changed! ' + self.request.person.profile.get_display_id() + ' has left your trip from ' + group.origin + 'to' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture is now scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
+		message = 'Your group has been changed! ' + self.get_object().person.profile.get_display_id() + ' has left your trip from ' + group.origin + 'to' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture is now scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
 
 		send_mail(
 
