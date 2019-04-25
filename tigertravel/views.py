@@ -13,6 +13,7 @@ import pytz
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from django.contrib.auth.models import User
 
 class RequestCreateView(CreateView):
 	model = Request
@@ -135,8 +136,7 @@ class RequestCreateView(CreateView):
 
 			gmailUser = 'tigertravel333@gmail.com'
 			gmailPassword = '3Tiger3Travel3'
-			recipient = 'shauryag@princeton.edu'
-			print(self.object.person.email)
+			recipient = self.object.person.profile.get_display_id() + '@princeton.edu'
 			msg = MIMEMultipart()
 			msg['From'] = gmailUser
 			msg['To'] = recipient
