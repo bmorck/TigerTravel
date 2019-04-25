@@ -1,7 +1,7 @@
 {% extends "tigertravel/base.html" %}
 {% block content %}
 	<h1>Group Page </h1>
-	<h2>{{ object.destination }} {{ object.date|date:"F d, Y" }}</h2>
+	<h2>FROM {{ object.origin }} TO {{ object.destination }} {{ object.date|date:"F d, Y" }}</h2>
 	<p>Departure Timeframe: {{ object.start_time }} - {{ object.end_time }}</p>
 	<p>Group: {% for member in object.members.all %} {{ member.name }} {% endfor %}</p>
 	<p>Group: {% for member in object.members.all %} 

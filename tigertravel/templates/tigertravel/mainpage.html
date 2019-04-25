@@ -20,6 +20,28 @@
 
 			{% csrf_token %}
 
+				<div id="div_id_origin" class="wrap-input100 validate-input">
+
+					<span class="label-input100">Origin</span>
+
+					<select name="origin" class="input100" required id="id_origin">
+
+						<option value="select">select one</option>
+
+						<option value="EWR">EWR</option>
+
+						<option value="JFK">JFK</option>
+
+						<option value="PHL">PHL</option>
+
+						<option value="PRINCETON">PRINCETON</option>
+
+					</select>
+
+					<span class="focus-input100"></span>
+
+				</div>
+
 				<div id="div_id_destination" class="wrap-input100 validate-input">
 
 					<span class="label-input100">Destination</span>
@@ -34,11 +56,14 @@
 
 						<option value="PHL">PHL</option>
 
+						<option value="PRINCETON">PRINCETON</option>
+
 					</select>
 
 					<span class="focus-input100"></span>
 
 				</div>
+
 
 				<div class="wrap-input100 validate-input">
 

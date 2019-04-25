@@ -20,30 +20,28 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-    	'''URL = "https://tigerbook.herokuapp.com/api/v1/getkey"
-    	data = requests.get(URL)
+
 
     	URL2 = "https://https://tigerbook.herokuapp.com/api/v1/undergraudates/" + instance.profile.get_display_id()
     	created2 = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
 
     	nonce = ''.join([random.choice('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/=') for i in range(32)])
     	username = instance.profile.get_display_id()
-    	password = data.content
+    	password = '6f9af9ef19a9218d821f6cd2cdb2c11d'
 
-    	byteToString = hashlib.sha256(nonce + created2 + password).digest()
-    	newString = byteToString.decode("utf-8")
-    	generated_digest = b64encode(newString)
+
+    	generated_digest = b64encode(hashlib.sha256((nonce + created2 + password).encode("utf-8")).digest())
 
     	headers = {
     		'Authorization': 'WSSE profile="UsernameToken"',
-    		'X-WSSE': 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % (username, generated_digest, b64encode(nonce), created2)
+    		'X-WSSE': 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % (username, generated_digest, b64encode(nonce.encode("utf-8")), created2)
     	}
     	
     	r = requests.get(URL2, headers = headers)
 
     	data2 = r.json()
 
-    	print(data2)'''
+    	print(data2)
 
     	instance.email = instance.profile.get_display_id() +'@princeton.edu'
     	Profile.objects.create(user=instance, email=instance.profile.get_display_id() +'@princeton.edu')

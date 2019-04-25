@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 class Request(models.Model):
+	origin = models.CharField(max_length=50, default='PRINCETON')
 	destination = models.CharField(max_length=50)
 	date = models.DateField()
 	start_time = models.TimeField()
@@ -15,6 +16,7 @@ class Request(models.Model):
 
 
 class Group(models.Model):
+	origin = models.CharField(max_length=50, default='PRINCETON') 
 	destination = models.CharField(max_length=50)
 	date = models.DateField()
 	start_time = models.TimeField()

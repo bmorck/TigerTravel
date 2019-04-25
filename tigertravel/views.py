@@ -7,10 +7,16 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.core.mail import send_mail
+import django.utils
+from django.utils import timezone
+import pytz
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 class RequestCreateView(CreateView):
 	model = Request
-	fields = ['destination', 'date', 'start_time', 'end_time']
+	fields = ['origin', 'destination', 'date', 'start_time', 'end_time']
 	template_name = 'tigertravel/mainpage.html'
 
 	def form_valid(self, form):
@@ -20,25 +26,30 @@ class RequestCreateView(CreateView):
 				messages.error(self.request, 'You cannot have two trip requests for the same date!')
 				return redirect('tigertravel-home')
 
-		if form.instance.date.year > datetime.datetime.now().year:
+		if form.instance.origin == form.instance.destination:
+			messages.error(self.request, 'Origin and Destination cannot be the same!')
+			return redirect('tigertravel-home')
+
+
+		if form.instance.date.year > datetime.datetime.now(pytz.timezone('US/Eastern')).year:
 			form.instance.person = self.request.user
 			form.instance.name = self.request.user.profile.get_display_id()
 			return super().form_valid(form)
 
-		elif form.instance.date.year == datetime.datetime.now().year:
-			if form.instance.date.month > datetime.datetime.now().month:
+		elif form.instance.date.year == datetime.datetime.now(pytz.timezone('US/Eastern')).year:
+			if form.instance.date.month > datetime.datetime.now(pytz.timezone('US/Eastern')).month:
 				form.instance.person = self.request.user
 				form.instance.name = self.request.user.profile.get_display_id()
 				return super().form_valid(form)
 
-			elif form.instance.date.month == datetime.datetime.now().month:
-				if form.instance.date.day > datetime.datetime.now().day:
+			elif form.instance.date.month == datetime.datetime.now(pytz.timezone('US/Eastern')).month:
+				if form.instance.date.day > datetime.datetime.now(pytz.timezone('US/Eastern')).day:
 					form.instance.person = self.request.user
 					form.instance.name = self.request.user.profile.get_display_id()
 					return super().form_valid(form)
 
 				elif form.instance.date.day == datetime.datetime.now().day:
-					if form.instance.start_time > datetime.datetime.now().time():
+					if form.instance.start_time > datetime.datetime.now(pytz.timezone('US/Eastern')).time():
 						form.instance.person = self.request.user
 						form.instance.name = self.request.user.profile.get_display_id()
 						return super().form_valid(form)
@@ -63,16 +74,16 @@ class RequestCreateView(CreateView):
 
 	def get_success_url(self):
 		for group in Group.objects.all():
-			if group.date < datetime.datetime.now().date():
+			if group.date < datetime.datetime.now(pytz.timezone('US/Eastern')).date():
 				group.delete()
 
-			elif group.date == datetime.datetime.now().date():
-				if group.start_time < datetime.datetime.now().time():
+			elif group.date == datetime.datetime.now(pytz.timezone('US/Eastern')).date():
+				if group.start_time < datetime.datetime.now(pytz.timezone('US/Eastern')).time():
 					group.delete()
 
 		changed = False
 		for group in Group.objects.all():
-			if group.date == self.object.date and group.destination == self.object.destination:
+			if (group.date == self.object.date and group.destination == self.object.destination) and group.origin == self.object.origin:
 				if self.object.end_time > group.start_time and self.object.start_time < group.end_time:
 					if len(group.members.all()) < 6:
 
@@ -92,26 +103,29 @@ class RequestCreateView(CreateView):
 						for member in group.members.all():
 							email_list.append(member.person.email)
 
-						message = 'Your group has been changed! ' + self.object.person.first_name + ' has joined your trip to ' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture from princeton is scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
+						message = 'Your group has been changed! ' + self.request.user.profile.get_display_id() + ' has joined your trip from ' + group.origin + 'to ' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture is scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
 
-						send_mail(
+						gmailUser = 'tigertravel333@gmail.com'
+						gmailPassword = '3Tiger3Travel3'
+						recipient = email_list
+						msg = MIMEMultipart()
+						msg['From'] = gmailUser
+						msg['To'] = recipient
+						msg['Subject'] = "New Group"
+						msg.attach(MIMEText(message))
 
-						'Your TigerTravel Group', 
-
-						message, 
-
-						'tigertravel333@gmail.com',
-
-						email_list,
-
-						fail_silently=False,
-
-						)
+						mailServer = smtplib.SMTP('smtp.gmail.com', 587)
+						mailServer.ehlo()
+						mailServer.starttls()
+						mailServer.ehlo()
+						mailServer.login(gmailUser, gmailPassword)
+						mailServer.sendmail(gmailUser, recipient, msg.as_string())
+						mailServer.close()
 						break
 
 		# if no group intersects, create new one
 		if changed == False:
-			new_group = Group.objects.create(destination=self.object.destination, 
+			new_group = Group.objects.create(origin=self.object.origin, destination=self.object.destination, 
 				date=self.object.date, start_time=self.object.start_time,
 				end_time=self.object.end_time)
 
@@ -119,21 +133,23 @@ class RequestCreateView(CreateView):
 			new_group.members.add(self.object)
 			new_group.save()
 
-			message = 'You have created a new group! You will be emailed when other people join!\nYour trip is scheduled to ' + new_group.destination + ' on ' + new_group.date.strftime("%A %d, %B %Y") + '.\n' + 'Departure from princeton is scheduled between ' + new_group.start_time.strftime('%I:%M %p') + ' and ' + new_group.end_time.strftime('%I:%M %p')
+			gmailUser = 'tigertravel333@gmail.com'
+			gmailPassword = '3Tiger3Travel3'
+			recipient = self.object.person.email
+			msg = MIMEMultipart()
+			msg['From'] = gmailUser
+			msg['To'] = recipient
+			msg['Subject'] = "New Group"
+			message = 'You have created a new group! You will be emailed when other people join!\nYour trip is scheduled from ' + new_group.origin + 'to' + new_group.destination + ' on ' + new_group.date.strftime("%A %d, %B %Y") + '.\n' + 'Departure is scheduled between ' + new_group.start_time.strftime('%I:%M %p') + ' and ' + new_group.end_time.strftime('%I:%M %p')
+			msg.attach(MIMEText(message))
 
-			send_mail(
-
-			'Your TigerTravel Group', 
-
-			message, 
-
-			'tigertravel333@gmail.com',
-
-			[self.object.person.email],
-
-			fail_silently=False,
-
-			)
+			mailServer = smtplib.SMTP('smtp.gmail.com', 587)
+			mailServer.ehlo()
+			mailServer.starttls()
+			mailServer.ehlo()
+			mailServer.login(gmailUser, gmailPassword)
+			mailServer.sendmail(gmailUser, recipient, msg.as_string())
+			mailServer.close()
 
 		return super().get_success_url()
 
@@ -149,10 +165,11 @@ class GroupListView(ListView):
 
 	def get_context_data(self):
 		for group in Group.objects.all():
-			if group.date == datetime.datetime.now().date() and group.start_time < datetime.datetime.now().time():
+			if group.date == datetime.datetime.now(pytz.timezone('US/Eastern')).date() and group.start_time < datetime.datetime.now(pytz.timezone('US/Eastern')).time():
 					for request in group.members.all():
 						request.delete()
 					group.delete()
+
 		return super().get_context_data()
 
 class GroupDetailView(DetailView):
@@ -189,6 +206,28 @@ class RequestDeleteView(DeleteView):
 				min = i.end_time
 		group.end_time = min
 		group.save()
+
+		email_list = []
+
+		for member in group.members.all():
+			if member != self.get_object():
+				email_list.append(member.person.email)
+
+		message = 'Your group has been changed! ' + self.request.user.profile.get_display_id() + ' has left your trip from ' + group.origin + 'to' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture is now scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
+
+		send_mail(
+
+		'Your TigerTravel Group', 
+
+		message, 
+
+		'tigertravel333@gmail.com',
+
+		email_list,
+
+		fail_silently=False,
+
+		)
 
 		if len(group.members.all()) == 1:
 			group.delete()
