@@ -104,7 +104,7 @@ class RequestCreateView(CreateView):
 						for member in group.members.all():
 							email_list.append(member.person.profile.get_display_id() + '@princeton.edu')
 
-						message = 'Your group has been changed! ' + self.request.person.profile.get_display_id() + ' has joined your trip from ' + group.origin + 'to ' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture is scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
+						message = 'Your group has been changed! ' + self.object.person.profile.get_display_id() + ' has joined your trip from ' + group.origin + 'to ' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture is scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
 						send_mail(
 						'Your TigerTravel Group',
 						message, 
