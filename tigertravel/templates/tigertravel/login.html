@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Welcome to TigerTravel</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/4.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Playfair Display" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<style>
+		.container {
+			position: relative;
+			width: 100%;
+			max-width: 400px;
+		}
+
+		/* Make the image to responsive */
+		.image {
+			padding-top: 50%;
+			width: 100%;
+			height: auto;
+		}
+
+		/* The overlay effect (full height and width) - lays on top of the container and over the image */
+		.overlay {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 100%;
+			width: 100%;
+			opacity: 0;
+			transition: .3s ease;
+			background-color: red;
+		}
+
+		/* When you mouse over the container, fade in the overlay icon*/
+		.container:hover .overlay {
+			opacity: 1;
+		}
+
+		/* The icon inside the overlay is positioned in the middle vertically and horizontally */
+		.icon {
+			color: white;
+			font-size: 100px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%);
+			text-align: center;
+		}
+
+		/* When you move the mouse over the icon, change color */
+		.fa-user:hover {
+			color: #eee;
+		}
+
+		.text {
+			color: white;
+			font-size: 40px;
+			font-family: Playfair Display;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			-webkit-transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+			text-align: center;
+		}
+
+		div.transbox {
+			position: absolute;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: #ffffff;
+			border: 1px solid black;
+			opacity: 0.6;
+			filter: alpha(opacity=60); /* For IE8 and earlier */
+		}
+
+		div.transbox p {
+			margin: 5%;
+			font-weight: bold;
+			color: #000000;
+		}
+
+		body {
+			
+			background-image: url("{% static 'tigertravel/images/pton.jpeg' %}");
+			
+			background-attachment: fixed;
+			background-size: auto 100%;
+			background-position: center;
+		}
+	</style>
+</head>
+<body>
+	<body>
+		<div class="background">
+			<div class="transbox">
+				<div style="text-align: center; color: Black; font-family: Playfair Display;font-weight:200; font-size: 30px; vertical-align: middle">Welcome to TigerTravel</div>
+				<div style="text-align: center; color: Black; font-family: Playfair Display;font-weight:200; font-size: 30px; vertical-align: middle">Please log in to continue</div>
+			</div>
+			<div class="container">
+				<img src="{% static 'tigertravel/images/white_logo_color_background.jpg' %}" alt="TigerTravel" class="image" style="width:100%">
+				<div class="overlay">
+					<a href="{% url 'tigertravel-home' %}" class="icon" title="User Profile">
+						<i class="fa fa-user"></i> 
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		
+	</body>
+</body>
+</html>

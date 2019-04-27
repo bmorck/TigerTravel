@@ -15,6 +15,9 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from django.contrib.auth.models import User
 
+def login(request):
+	return render(request, 'tigertravel/login.html')
+
 class RequestCreateView(CreateView):
 	model = Request
 	fields = ['origin', 'destination', 'date', 'start_time', 'end_time']
@@ -34,25 +37,25 @@ class RequestCreateView(CreateView):
 
 		if form.instance.date.year > datetime.datetime.now(pytz.timezone('US/Eastern')).year:
 			form.instance.person = self.request.user
-			form.instance.name = self.request.user.profile.get_display_id()
+			form.instance.name = self.request.user.person.name
 			return super().form_valid(form)
 
 		elif form.instance.date.year == datetime.datetime.now(pytz.timezone('US/Eastern')).year:
 			if form.instance.date.month > datetime.datetime.now(pytz.timezone('US/Eastern')).month:
 				form.instance.person = self.request.user
-				form.instance.name = self.request.user.profile.get_display_id()
+				form.instance.name = self.request.user.person.name
 				return super().form_valid(form)
 
 			elif form.instance.date.month == datetime.datetime.now(pytz.timezone('US/Eastern')).month:
 				if form.instance.date.day > datetime.datetime.now(pytz.timezone('US/Eastern')).day:
 					form.instance.person = self.request.user
-					form.instance.name = self.request.user.profile.get_display_id()
+					form.instance.name = self.request.user.person.name
 					return super().form_valid(form)
 
 				elif form.instance.date.day == datetime.datetime.now().day:
 					if form.instance.start_time > datetime.datetime.now(pytz.timezone('US/Eastern')).time():
 						form.instance.person = self.request.user
-						form.instance.name = self.request.user.profile.get_display_id()
+						form.instance.name = self.request.user.person.name
 						return super().form_valid(form)
 
 					else:

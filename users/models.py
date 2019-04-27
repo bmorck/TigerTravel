@@ -6,7 +6,8 @@ from django.dispatch import receiver
 import hashlib
 import random
 from base64 import b64encode
-from datetime import datetime
+import datetime
+
 
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='person')
@@ -17,35 +18,32 @@ class Profile(models.Model):
 	def __str__(self):
 		return f'{self.user.username} Profile'
 
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
 
+        url = 'https://tigerbook.herokuapp.com/api/v1/undergraduates/' + instance.profile.get_display_id()
+        print(url)
+        created = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+        nonce = ''.join([random.choice('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/=') for i in range(32)])
+        username = 'shauryag+tigertravel333'
+        link = "https://tigerbook.herokuapp.com/api/v1/getkey/tigertravel333"
+        password = '16d243926dbcf1b9a087073415f5beac'
 
-    	URL2 = "https://https://tigerbook.herokuapp.com/api/v1/undergraudates/" + instance.profile.get_display_id()
-    	created2 = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+        generated_digest = b64encode(hashlib.sha256((nonce + created + password).encode('utf-8')).digest()).decode('utf-8')
 
-    	nonce = ''.join([random.choice('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/=') for i in range(32)])
-    	username = instance.profile.get_display_id()
-    	password = '6f9af9ef19a9218d821f6cd2cdb2c11d'
+        r = requests.get(url, headers = {
+            'Authorization': 'WSSE profile="UsernameToken"',
+            'X-WSSE': 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % (username, generated_digest, b64encode(nonce.encode()).decode('utf-8'), created)
+        })
+
+        instance.email = instance.profile.get_display_id() + '@princeton.edu'
+
+        Profile.objects.create(user=instance, college = r.json()['res_college'], email=instance.profile.get_display_id()+'@princeton.edu', name=r.json()['first_name'] + ' ' + r.json()['last_name'])
 
 
-    	generated_digest = b64encode(hashlib.sha256((nonce + created2 + password).encode("utf-8")).digest())
-
-    	headers = {
-    		'Authorization': 'WSSE profile="UsernameToken"',
-    		'X-WSSE': 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"' % (username, generated_digest, b64encode(nonce.encode("utf-8")), created2)
-    	}
-    	
-    	r = requests.get(URL2, headers = headers)
-
-    	data2 = r.json()
-
-    	print(data2)
-
-    	instance.email = instance.profile.get_display_id() +'@princeton.edu'
-    	Profile.objects.create(user=instance, email=instance.profile.get_display_id() +'@princeton.edu')
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-	instance.profile.save()
+    instance.profile.save()
