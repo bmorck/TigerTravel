@@ -4,12 +4,9 @@
       <div class="media">
         <img class="rounded-circle account-img" src="https://tigerbook.herokuapp.com/images/name">
         <div class="media-body">
-          <h2 class="account-heading">{{ user.profile.get_display_id}}</h2>
-          <p class="text-secondary">{{ user.username }}</p>
+          <h2 class="account-heading">{{ user.person.name }}</h2>
           <p class="text-secondary">{{ user.person.email }}</p>
-          <p class="text-secondary">{{ user.person.college }}</p>
-          <p class="text-secondary">{{ user.person.name }}</p>
-
+          <p class="text-secondary">{{ user.person.college }} College</p>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
