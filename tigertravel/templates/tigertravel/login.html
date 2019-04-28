@@ -1,125 +1,200 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Welcome to TigerTravel</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ {% load static %} 
+ <!DOCTYPE html>
+ <html lang="en">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/4.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <head>
 
-	<link href="https://fonts.googleapis.com/css?family=Playfair Display" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" type="image/png" href="{% static 'tigertravel/images/icons/favicon.ico' %}"/>
+  <title>Welcome to TigerTravel</title>
 
-	<style>
-		.container {
-			position: relative;
-			width: 100%;
-			max-width: 400px;
-		}
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"> 
 
-		/* Make the image to responsive */
-		.image {
-			padding-top: 50%;
-			width: 100%;
-			height: auto;
-		}
+  <!-- Custom fonts for this template -->
+  <link href="{% static 'login/vendor/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css"> 
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-		/* The overlay effect (full height and width) - lays on top of the container and over the image */
-		.overlay {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			height: 100%;
-			width: 100%;
-			opacity: 0;
-			transition: .3s ease;
-			background-color: red;
-		}
+  <!-- Custom styles for this template -->
+  <link href="{% static 'login/css/landing-page.min.css' %}" rel="stylesheet"> 
+  <style>
+    @bg: #2d2d37; // Dark blue
+    @primary: #fd6b21; // Orange
 
-		/* When you mouse over the container, fade in the overlay icon*/
-		.container:hover .overlay {
-			opacity: 1;
-		}
+    body { background: @bg;}
+    a { color: white; text-decoration: none; }
 
-		/* The icon inside the overlay is positioned in the middle vertically and horizontally */
-		.icon {
-			color: white;
-			font-size: 100px;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			-ms-transform: translate(-50%, -50%);
-			text-align: center;
-		}
+    .arrow {
+      text-align: center;
+      margin: 8% 0;
+    }
+    .bounce {
+      -moz-animation: bounce 2s infinite;
+      -webkit-animation: bounce 2s infinite;
+      animation: bounce 3s infinite;
+    }
 
-		/* When you move the mouse over the icon, change color */
-		.fa-user:hover {
-			color: #eee;
-		}
-
-		.text {
-			color: white;
-			font-size: 40px;
-			font-family: Playfair Display;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			-webkit-transform: translate(-50%, -50%);
-			-ms-transform: translate(-50%, -50%);
-			transform: translate(-50%, -50%);
-			text-align: center;
-		}
-
-		div.transbox {
-			position: absolute;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			background-color: #ffffff;
-			border: 1px solid black;
-			opacity: 0.6;
-			filter: alpha(opacity=60); /* For IE8 and earlier */
-		}
-
-		div.transbox p {
-			margin: 5%;
-			font-weight: bold;
-			color: #000000;
-		}
-
-		body {
-			
-			background-image: url("{% static 'tigertravel/images/pton.jpeg' %}");
-			
-			background-attachment: fixed;
-			background-size: auto 100%;
-			background-position: center;
-		}
-	</style>
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-30px);
+      }
+      60% {
+        transform: translateY(-15px);
+      }
+    }
+  </style>
 </head>
+
 <body>
-	<body>
-		<div class="background">
-			<div class="transbox">
-				<div style="text-align: center; color: Black; font-family: Playfair Display;font-weight:200; font-size: 30px; vertical-align: middle">Welcome to TigerTravel</div>
-				<div style="text-align: center; color: Black; font-family: Playfair Display;font-weight:200; font-size: 30px; vertical-align: middle">Please log in to continue</div>
-			</div>
-			<div class="container">
-				<img src="{% static 'tigertravel/images/white_logo_color_background.jpg' %}" alt="TigerTravel" class="image" style="width:100%">
-				<div class="overlay">
-					<a href="{% url 'tigertravel-home' %}" class="icon" title="User Profile">
-						<i class="fa fa-user"></i> 
-					</a>
-				</div>
-			</div>
-		</div>
-		
-		
-	</body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-light bg-light static-top" style = "position:fixed; top:0; width:100%; z-index: 100" >
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a>
+      <a class="btn btn-primary" href="{% url 'tigertravel-home' %}">Login with CAS</a>
+    </div>
+  </nav>
+
+  <!-- Masthead -->
+  <header class="masthead text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">Welcome to TigerTravel!</h1>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4 mx-auto">
+          <a class="btn btn-block btn-lg btn-primary" href="{% url 'tigertravel-home' %}">Find Me Some Travellers &nbsp &nbsp<i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="arrow bounce">
+        <a class="fa fa-arrow-down fa-2x"></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Icons Grid -->
+  <section class="features-icons bg-light text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="fas fa-plane-departure m-auto text-primary"></i>
+            </div>
+            <h3>Automatic Matching</h3>
+            <p class="lead mb-0">Our algorithm will pair you with a group of up to 6 Tigers going to the same location</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="fas fa-user-circle m-auto text-primary"></i>
+            </div>
+            <h3>Account Created with CAS</h3>
+            <p class="lead mb-0">Your personal account is automatically created.</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="fas fa-check-circle m-auto text-primary"></i>
+            </div>
+            <h3>Easy to Use</h3>
+            <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Showcases -->
+  <section class="showcase">
+    <div class="container-fluid p-0">
+      <div class="row no-gutters">
+
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('{% static 'login/img/bg-showcase-1.jpg' %}');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2>Fully Responsive Design</h2>
+          <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will look great on any device, whether it's a phone, tablet, or desktop the page will behave responsively!</p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6 text-white showcase-img" style="background-image: url('{% static 'login/img/bg-showcase-2.jpg' %}');"></div>
+        <div class="col-lg-6 my-auto showcase-text">
+          <h2>Updated For Bootstrap 4</h2>
+          <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 4 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 4!</p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('{% static 'login/img/bg-showcase-3.jpg' %}');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2>Easy to Use &amp; Customize</h2>
+          <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some deeper customization options. Out of the box, just add your content and images, and your new landing page will be ready to go!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="testimonials text-center bg-light">
+    <div class="container">
+      <h2 class="mb-5">Meet the Devs</h2>
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="{% static 'login/img/dtc2.png' %}" alt="">
+            <h5>Donovan Coronado</h5>
+            <p class="font-weight-light mb-0">Info</p>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="{% static 'login/img/shauryag.png' %}" alt="">
+            <h5>Shaurya Garg</h5>
+            <p class="font-weight-light mb-0">Info</p>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="{% static 'login/img/jaehok.png' %}" alt="">
+            <h5>Hanson Kang</h5>
+            <p class="font-weight-light mb-0">Info</p>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="{% static 'login/img/rmorck.png' %}" alt="">
+            <h5>Bobby Morck</h5>
+            <p class="font-weight-light mb-0">Info</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+          <p class="text-muted small mb-4 mb-lg-0">&copy; TigerTravel 2019. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </body>
+
 </html>
