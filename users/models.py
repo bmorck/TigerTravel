@@ -40,7 +40,12 @@ def create_user_profile(sender, instance, created, **kwargs):
 
         instance.email = instance.profile.get_display_id() + '@princeton.edu'
 
-        Profile.objects.create(user=instance, college = r.json()['res_college'], email=instance.profile.get_display_id()+'@princeton.edu', name=r.json()['first_name'] + ' ' + r.json()['last_name'])
+        
+        if (r.content == b'Student does not exist'):
+            Profile.objects.create(user=instance, college = 'Graduate', email=instance.profile.get_display_id()+'@princeton.edu', name=instance.profile.get_display_id())
+        else:
+            Profile.objects.create(user=instance, college = r.json()['res_college'], email=instance.profile.get_display_id()+'@princeton.edu', name=r.json()['first_name'] + ' ' + r.json()['last_name'])
+
 
 
 

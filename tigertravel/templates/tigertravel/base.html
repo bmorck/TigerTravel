@@ -5,14 +5,60 @@
 <html lang="en">
 
 <head>
+	<style>
+		.content-section {
+		  background: #ffffff;
+		  padding: 10px 20px;
+		  border: 1px solid #dddddd;
+		  border-radius: 3px;
+		  margin-bottom: 20px;
+		}
 
+		.article-title {
+		  color: #444444;
+		}
+
+		a.article-title:hover {
+		  color: #428bca;
+		  text-decoration: none;
+		}
+
+		.article-content {
+		  white-space: pre-line;
+		}
+
+		.article-img {
+		  height: 65px;
+		  width: 65px;
+		  margin-right: 16px;
+		}
+
+		.article-metadata {
+		  padding-bottom: 1px;
+		  margin-bottom: 4px;
+		  border-bottom: 1px solid #e3e3e3
+		}
+
+		.article-metadata a:hover {
+		  color: #333;
+		  text-decoration: none;
+		}
+
+		.article-svg {
+		  width: 25px;
+		  height: 25px;
+		  vertical-align: middle;
+		}
+	</style>
 
 
 	<meta charset="utf-8">
 
   	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 
   	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/stylesheet.css' %}">
 

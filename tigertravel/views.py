@@ -151,6 +151,7 @@ class RequestListView(ListView):
 	model = Request
 	context_object_name = 'posts'
 	ordering = ['date']
+	template_name = 'tigertravel/profile.html'
 
 
 class GroupListView(ListView):
