@@ -10,13 +10,13 @@ import datetime
 
 
 class Profile(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='person')
-	name = models.CharField(max_length=50, default='Firstname Lastname')
-	college = models.CharField(max_length=50, default='RoMa')
-	email = models.CharField(max_length=50, default='example@princeton.edu')
-
-	def __str__(self):
-		return f'{self.user.username} Profile'
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='person')
+    name = models.CharField(max_length=50, default='Firstname Lastname')
+    college = models.CharField(max_length=50, default='RoMa')
+    email = models.CharField(max_length=50, default='example@princeton.edu')
+    year = models.CharField(max_length=50, default='#')
+    piclink = models.CharField(max_length=50, default='#')
+    tigerlink = models.CharField(max_length=50, default='#')
 
 
 @receiver(post_save, sender=User)
@@ -24,7 +24,6 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
 
         url = 'https://tigerbook.herokuapp.com/api/v1/undergraduates/' + instance.profile.get_display_id()
-        print(url)
         created = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
         nonce = ''.join([random.choice('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/=') for i in range(32)])
         username = 'shauryag+tigertravel333'
@@ -44,7 +43,9 @@ def create_user_profile(sender, instance, created, **kwargs):
         if (r.content == b'Student does not exist'):
             Profile.objects.create(user=instance, college = 'Graduate', email=instance.profile.get_display_id()+'@princeton.edu', name=instance.profile.get_display_id())
         else:
-            Profile.objects.create(user=instance, college = r.json()['res_college'], email=instance.profile.get_display_id()+'@princeton.edu', name=r.json()['first_name'] + ' ' + r.json()['last_name'])
+            Profile.objects.create(user=instance, college = r.json()['res_college'], email=instance.profile.get_display_id()+'@princeton.edu', name=r.json()['first_name'] + ' ' + r.json()['last_name'],
+                year = r.json()['class_year'], piclink='https://tigerbook.herokuapp.com/images/' + instance.profile.get_display_id(), 
+                tigerlink='https://tigerbook.herokuapp.com/student/' + instance.profile.get_display_id())
 
 
 

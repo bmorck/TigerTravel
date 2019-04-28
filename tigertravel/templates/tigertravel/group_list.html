@@ -18,7 +18,7 @@
 	
 			<p>Group: {% for member in object.members.all %} {{ member.name }}, {% endfor %}</p>
 			<p>{% for member in object.members.all %} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a id="2{{ member.person.profile.get_display_id }}" href="https://tigerbook.herokuapp.com/student/name2" target="_blank"><img id="{{ member.person.profile.get_display_id }}" class="rounded-circle" style="width:50px;height:65px" src="https://tigerbook.herokuapp.com/images/name"></a>
+			<a id="2{{ member.person.profile.get_display_id }}" href="{{ member.person.person.tigerlink }}" target="_blank"><img id="{{ member.person.profile.get_display_id}}{{ object.date }}" class="rounded-circle" style="width:50px;height:65px" src="{{ member.person.person.piclink }}"></a>
 			<script>
 				var name{{ member.person.profile.get_display_id }} = "{{ member.person.profile.get_display_id }}"; 
 		    	$(function(){
@@ -29,15 +29,16 @@
 		       		});
 		   		});
 		   		$(function(){
-		       	$('#2{{ member.person.profile.get_display_id }}').each(function(){
+		       	$('#2{{ member.person.profile.get_display_id }}{{ object.date }}').each(function(){
 		           var hrefpath = $(this).attr('href');
 		           hrefpath = hrefpath.replace('name2',name{{ member.person.profile.get_display_id }});
 		           $(this).attr('href',hrefpath);
 		       		});
 		   		});
 		   		
-			</script>
+			</script>	
 	 		{% endfor %}</p>
+	 	
 	 	</br>
 		</div>
 		</center>
