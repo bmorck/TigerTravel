@@ -51,7 +51,6 @@
 		}
 	</style>
 
-
 	<meta charset="utf-8">
 
   	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,6 +74,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Helvetica:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
 
 
@@ -134,13 +134,21 @@
 
 <body>
 
+  <nav class="navbar navbar-light bg-light static-top" style = "position:fixed; top:0; width:100%; z-index: 100" >
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a> 
+      <a class="" href="{% url 'tigertravel-home' %}" id="groups">Find a Ride &nbsp <i class="far fa-hand-point-right"></i></a>
+      <a class="" href="{% url 'tigertravel-groups' %}" id="groups">Active Groups &nbsp <i class="fas fa-layer-group"></i></a>
+      <a class="" href="{% url 'tigertravel-listings' %}" id="listings">My Profile &nbsp <i class="fas fa-user"></i></a>
+  </div>
+  </nav>
 	<div class="topnav">
 
 	  <a class="" href="{% url 'tigertravel-home' %}" id="home">Home</a>
 
 	  <a class="" href="{% url 'tigertravel-groups' %}" id="groups">Active Groups</a>
 
-	  <a class="" href="{% url 'tigertravel-listings' %}" id="listings">Active Listings</a>
+	  
 
 	  <a class="" href="{% url 'tigertravel-profile' %}">My Profile</a>
 

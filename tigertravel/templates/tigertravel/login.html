@@ -58,7 +58,7 @@
   <nav class="navbar navbar-light bg-light static-top" style = "position:fixed; top:0; width:100%; z-index: 100" >
     <div class="container">
       <a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a>
-      <a class="btn btn-primary" href="{% url 'tigertravel-home' %}">Login with CAS</a>
+      <a class="btn btn-primary" style="background-color:#ff8f00;border:none" href="{% url 'tigertravel-home' %}">Continue with CAS</a>
     </div>
   </nav>
 
@@ -71,11 +71,11 @@
           <h1 class="mb-5">Welcome to TigerTravel!</h1>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4 mx-auto">
-          <a class="btn btn-block btn-lg btn-primary" href="{% url 'tigertravel-home' %}">Find Me Some Travellers &nbsp &nbsp<i class="fas fa-arrow-circle-right"></i></a>
+          <a class="btn btn-block btn-lg btn-primary" style="background-color:#ff8f00;border:none" href="{% url 'tigertravel-home' %}">Find Me Some Travellers &nbsp &nbsp<i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <div class="arrow bounce">
-        <a class="fa fa-arrow-down fa-2x"></a>
+        <a class="fa fa-arrow-down fa-2x" ></a>
       </div>
     </div>
   </header>
@@ -87,7 +87,7 @@
         <div class="col-lg-4">
           <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
             <div class="features-icons-icon d-flex">
-              <i class="fas fa-plane-departure m-auto text-primary"></i>
+              <i class="fas fa-plane-departure m-auto" style="color:#ff8f00;"></i>
             </div>
             <h3>Automatic Matching</h3>
             <p class="lead mb-0">Our algorithm will pair you with a group of up to 6 Tigers going to the same location</p>
@@ -96,7 +96,7 @@
         <div class="col-lg-4">
           <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
             <div class="features-icons-icon d-flex">
-              <i class="fas fa-user-circle m-auto text-primary"></i>
+              <i class="fas fa-user-circle m-auto" style="color:#ff8f00;"></i>
             </div>
             <h3>Account Created with CAS</h3>
             <p class="lead mb-0">Your personal account is automatically created.</p>
@@ -105,7 +105,7 @@
         <div class="col-lg-4">
           <div class="features-icons-item mx-auto mb-0 mb-lg-3">
             <div class="features-icons-icon d-flex">
-              <i class="fas fa-check-circle m-auto text-primary"></i>
+              <i class="fas fa-check-circle m-auto" style="color:#ff8f00;"></i>
             </div>
             <h3>Easy to Use</h3>
             <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
@@ -114,8 +114,6 @@
       </div>
     </div>
   </section>
-
-
 
   <!-- About -->
   <section class="testimonials text-center bg-light">
