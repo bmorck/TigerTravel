@@ -18,6 +18,8 @@ from django.contrib.auth.models import User
 def login(request):
 	return render(request, 'tigertravel/login.html')
 
+
+
 class RequestCreateView(CreateView):
 	model = Request
 	fields = ['origin', 'destination', 'date', 'start_time', 'end_time']
@@ -27,11 +29,11 @@ class RequestCreateView(CreateView):
 
 		for request in Request.objects.all():
 			if self.request.user == request.person and form.instance.date == request.date:
-				messages.error(self.request, 'You cannot have two trip requests for the same date!')
+				messages.info(self.request, 'You cannot have two trip requests for the same date!')
 				return redirect('tigertravel-home')
 
 		if form.instance.origin == form.instance.destination:
-			messages.error(self.request, 'Origin and Destination cannot be the same!')
+			messages.info(self.request, 'Origin and Destination cannot be the same!')
 			return redirect('tigertravel-home')
 
 
@@ -59,21 +61,21 @@ class RequestCreateView(CreateView):
 						return super().form_valid(form)
 
 					else:
-						messages.error(self.request, 'You cannot schedule a trip in the past (Time)!')
+						messages.info(self.request, 'You cannot schedule a trip in the past (Time)!')
 						return redirect('tigertravel-home')
 
 
 
 				else:
-					messages.error(self.request, 'You cannot schedule a trip in the past (Day)!')
+					messages.info(self.request, 'You cannot schedule a trip in the past (Day)!')
 					return redirect('tigertravel-home')
 
 			else:
-				messages.error(self.request, 'You cannot schedule a trip in the past! (Month)')
+				messages.info(self.request, 'You cannot schedule a trip in the past! (Month)')
 				return redirect('tigertravel-home')
 
 		else:	
-			messages.error(self.request, 'You cannot schedule a trip in the past! (Year)')
+			messages.info(self.request, 'You cannot schedule a trip in the past! (Year)')
 			return redirect('tigertravel-home')
 
 	def get_success_url(self):
@@ -101,6 +103,8 @@ class RequestCreateView(CreateView):
 
 						#CHANGED
 						group.members.add(self.object)
+						temp = int(group.size) + 1
+						group.size = str(temp)
 						group.save()
 						email_list = []
 
@@ -153,6 +157,11 @@ class RequestListView(ListView):
 	ordering = ['date']
 	template_name = 'tigertravel/profile.html'
 
+	def get_context_data(self, **kwargs):
+		context = super(RequestListView, self).get_context_data(**kwargs)
+		context['groups'] = Group.objects.all()
+		return context
+
 
 class GroupListView(ListView):
 	model = Group
@@ -200,6 +209,8 @@ class RequestDeleteView(DeleteView):
 			if i.end_time < min and i != self.get_object():
 				min = i.end_time
 		group.end_time = min
+		temp = int(group.size) - 1
+		group.size = str(temp)
 		group.save()
 
 		email_list = []

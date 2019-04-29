@@ -22,5 +22,6 @@ class Group(models.Model):
 	start_time = models.TimeField()
 	end_time = models.TimeField()
 	members = models.ManyToManyField(Request)
+	size = models.CharField(max_length=50, default="1")
 
 

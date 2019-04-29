@@ -76,6 +76,8 @@
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+
+
 <!--===============================================================================================-->
 
 	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
@@ -142,13 +144,16 @@
 
 	  <a class="" href="{% url 'tigertravel-profile' %}">My Profile</a>
 
+	  <a class="" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+
+
 	</div>
 
 	{% if messages %}
 
 		{% for message in messages %}
 
-			<div class="alert alert-{{ message.tags }}">
+			<div class="alert alert-warning" role="alert">
 
 				{{ message }}
 
