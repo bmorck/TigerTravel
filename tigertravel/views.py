@@ -23,7 +23,7 @@ def login(request):
 class RequestCreateView(CreateView):
 	model = Request
 	fields = ['origin', 'destination', 'date', 'start_time', 'end_time']
-	template_name = 'tigertravel/mainpage.html'
+	template_name = 'tigertravel/index.html'
 
 	def form_valid(self, form):
 
@@ -34,6 +34,26 @@ class RequestCreateView(CreateView):
 
 		if form.instance.origin == form.instance.destination:
 			messages.info(self.request, 'Origin and Destination cannot be the same!')
+			return redirect('tigertravel-home')
+
+		if form.instance.start_time > form.instance.end_time:
+
+			if (form.instance.start_time.hour >= 12 and form.instance.end_time.hour >= 12) or (form.instance.start_time.hour < 12 and form.instance.end_time.hour < 12):
+
+				messages.error(self.request, 'Start time cannot be after end time!')
+
+				return redirect('tigertravel-home')
+
+
+
+		minInterval = datetime.timedelta(minutes=30)
+
+		reqInterval = datetime.timedelta(hours=form.instance.end_time.hour-form.instance.start_time.hour, minutes=form.instance.end_time.minute-form.instance.start_time.minute)
+
+		if (reqInterval.seconds < minInterval.seconds):
+
+			messages.error(self.request, 'Departure interval must be greater than 30 minutes!')
+
 			return redirect('tigertravel-home')
 
 

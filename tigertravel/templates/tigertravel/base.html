@@ -67,7 +67,7 @@
 
 <!--===============================================================================================-->
 
-	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/vendor/bootstrap/css/bootstrap.min.css' %}">
+	
 
 <!--===============================================================================================-->
 
@@ -118,6 +118,20 @@
 
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+  	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Booking Form HTML Template</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Helvetica:400,700" rel="stylesheet">
+
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="{% static 'tigertravel/css/style.css' %}" />
+
 
 
 	{% if title %}
@@ -133,45 +147,28 @@
 </head>
 
 <body>
-
-  <nav class="navbar navbar-light bg-light static-top" style = "position:fixed; top:0; width:100%; z-index: 100" >
-    <div class="container">
-      <a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a> 
-      <a class="" href="{% url 'tigertravel-home' %}" id="groups">Find a Ride &nbsp <i class="far fa-hand-point-right"></i></a>
-      <a class="" href="{% url 'tigertravel-groups' %}" id="groups">Active Groups &nbsp <i class="fas fa-layer-group"></i></a>
-      <a class="" href="{% url 'tigertravel-listings' %}" id="listings">My Profile &nbsp <i class="fas fa-user"></i></a>
-  </div>
-  </nav>
-	<div class="topnav">
-
-	  <a class="" href="{% url 'tigertravel-home' %}" id="home">Home</a>
-
-	  <a class="" href="{% url 'tigertravel-groups' %}" id="groups">Active Groups</a>
-
-	  
-
-	  <a class="" href="{% url 'tigertravel-profile' %}">My Profile</a>
-
-	  <a class="" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
-
-
+	<div class="row">
+	  <nav class="navbar navbar-light bg-light static-top" style = "position:fixed;top:0; width:100%; z-index: 100" >
+	    <div class="container">
+	      <a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a> 
+	      <a class="" href="{% url 'tigertravel-home' %}" id="groups">Find a Ride &nbsp <i class="far fa-hand-point-right"></i></a>
+	      <a class="" href="{% url 'tigertravel-groups' %}" id="groups">Active Groups &nbsp <i class="fas fa-layer-group"></i></a>
+	      <a class="" href="{% url 'tigertravel-listings' %}" id="listings">My Profile &nbsp <i class="fas fa-user"></i></a>
+	  </div>
+	  </nav>
 	</div>
-
+	<div style="margin-top:80px">
 	{% if messages %}
-
 		{% for message in messages %}
-
-			<div class="alert alert-warning" role="alert">
-
+			<div class="alert alert-danger" role="alert" style="margin:0; border-radius:30px">
 				{{ message }}
-
 			</div>
-
 		{% endfor %}
-
 	{% endif%}
 
+
 	{% block content %}{% endblock %}
+	</div>
 
 </body>
 
