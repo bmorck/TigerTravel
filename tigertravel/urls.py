@@ -7,10 +7,9 @@ from users import views as user_views
 urlpatterns = [
     path('', views.login, name='tigertravel-login'),
     path('home/', login_required(RequestCreateView.as_view()), name='tigertravel-home'),
-    path('listings/', login_required(RequestListView.as_view()), name='tigertravel-listings'),
+    path('profile/', login_required(RequestListView.as_view()), name='tigertravel-profile'),
     path('groups/', login_required(GroupListView.as_view()), name='tigertravel-groups'),
     path('groups/<int:pk>', login_required(GroupDetailView.as_view()), name='group-detail'),
-    path('profile/', user_views.profile, name='tigertravel-profile'),
     path('delete/<int:pk>', login_required(RequestDeleteView.as_view()), name='request-delete'),
     
 

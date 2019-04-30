@@ -1,3 +1,4 @@
+<title>TigerTravel - Group Listings</title>
 {% extends "tigertravel/base.html" %}
 {% block content %}
 	{% for object in object_list %}
@@ -12,7 +13,8 @@
   	   		<div class ="container" style="background-color: #ffc796; border-radius: 10px;">
 
   	   		</br>
-			<a href="#"><h1 style="font-size:30px;">{{ object.origin }}&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;{{ object.destination }} {{ object.date|date:"F d, Y" }}</h1></a>
+			<p><h1 style="font-size:20px;">{{ object.origin }}&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;{{ object.destination }} </h1></p>
+			<h1 style="font-size:20px;">{{ object.date|date:"F d, Y" }}</h1>
 		
 			<p>Departure Timeframe: {{ object.start_time }} - {{ object.end_time }}</p>
 	

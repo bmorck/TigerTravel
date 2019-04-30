@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Request, Group
-from django.views.generic import CreateView, ListView, DetailView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.contrib import messages
 import datetime
 from django.shortcuts import redirect
@@ -131,9 +131,9 @@ class RequestCreateView(CreateView):
 						for member in group.members.all():
 							email_list.append(member.person.profile.get_display_id() + '@princeton.edu')
 
-						message = 'Your group has been changed! ' + self.object.person.profile.get_display_id() + ' has joined your trip from ' + group.origin + 'to ' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture is scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
+						message = 'Your group has been changed! ' + self.object.person.profile.get_display_id() + ' has joined your trip from ' + group.origin + ' to ' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '. Departure is now scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p') + '.\n\nCheers!\n\nTigerTravel'
 						send_mail(
-						'Your TigerTravel Group',
+						'TigerTravel Group Update for ' + group.date.strftime("%B %d, %Y"),
 						message, 
 						'tigertravel333@gmail.com',
 						email_list,
@@ -157,8 +157,8 @@ class RequestCreateView(CreateView):
 			msg = MIMEMultipart()
 			msg['From'] = gmailUser
 			msg['To'] = recipient
-			msg['Subject'] = "New Group"
-			message = 'You have created a new group! You will be emailed when other people join!\nYour trip is scheduled from ' + new_group.origin + 'to' + new_group.destination + ' on ' + new_group.date.strftime("%A %d, %B %Y") + '.\n' + 'Departure is scheduled between ' + new_group.start_time.strftime('%I:%M %p') + ' and ' + new_group.end_time.strftime('%I:%M %p')
+			msg['Subject'] = "New TigerTravel Group for " + new_group.date.strftime("%B %d, %Y")
+			message = 'Dear ' + self.request.user.person.name + ',\n\n' 'You have created a new group! You will be emailed when other people join. \n\nYour trip is scheduled from ' + new_group.origin + ' to ' + new_group.destination + ' on ' + new_group.date.strftime("%A %B %d, %Y") + '. ' + 'Departure is scheduled between ' + new_group.start_time.strftime('%I:%M %p') + ' and ' + new_group.end_time.strftime('%I:%M %p') + '.\n\nCheers!\n\nTigerTravel'
 			msg.attach(MIMEText(message))
 
 			mailServer = smtplib.SMTP('smtp.gmail.com', 587)
@@ -183,6 +183,8 @@ class RequestListView(ListView):
 		return context
 
 
+
+
 class GroupListView(ListView):
 	model = Group
 	ordering = ['date']
@@ -201,7 +203,7 @@ class GroupDetailView(DetailView):
 
 class RequestDeleteView(DeleteView):
 	model = Request
-	success_url = reverse_lazy('tigertravel-listings')
+	success_url = reverse_lazy('tigertravel-profile')
 
 	def delete(self, *args, **kwargs):
 		group = self.get_object().group_set.first()
@@ -259,9 +261,6 @@ class RequestDeleteView(DeleteView):
 			group.delete()
 
 		return super(RequestDeleteView, self).delete(*args, **kwargs)
-
-
-
 
 
 

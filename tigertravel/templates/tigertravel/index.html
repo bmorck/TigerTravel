@@ -1,3 +1,4 @@
+<title>TigerTravel - Find Me a Ride!</title>
 {% extends "tigertravel/base.html" %}
 {% block content %}
 	<div id="booking" class="section">
@@ -6,8 +7,8 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="booking-cta">
-							<h1>TigerTravel</h1>
-							<p>TigerTravel</p>
+							<h1></h1>
+							<p></p>
 						</div>
 					</div>
 					<div class="col-md-7 col-md-offset-1">
@@ -60,9 +61,9 @@
 									</div>
 									
 								</div>
-								
+															
 								<div class="form-btn">
-									<button class="submit-btn" type="submit">Submit Request</button>
+									<button class="submit-btn" type="submit">Submit Request &nbsp <i class="fas fa-check-circle"></i></button>
 								</div>
 							</form>
 						</div>
@@ -71,4 +72,7 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		document.getElementById('home').classList.add('active');
+	</script>
 {% endblock content %}

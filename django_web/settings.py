@@ -145,8 +145,7 @@ UNIAUTH_LOGIN_DISPLAY_STANDARD = False
 UNIAUTH_LOGOUT_CAS_COMPLETELY = True
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
-
-django_heroku.settings(locals())   
+django_heroku.settings(locals()) 
 
 EMAIL_HOST = 'smtp.gmail.com'
 

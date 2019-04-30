@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link rel="icon" type="image/png" href="{% static 'tigertravel/images/icons/favicon.ico' %}"/>
-  <title>Welcome to TigerTravel</title>
+  <title>Welcome to TigerTravel!</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"> 
@@ -56,10 +56,8 @@
 
   <!-- Navigation -->
   <nav class="navbar navbar-light bg-light static-top" style = "position:fixed; top:0; width:100%; z-index: 100" >
-    <div class="container">
       <a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a>
       <a class="btn btn-primary" style="background-color:#ff8f00;border:none" href="{% url 'tigertravel-home' %}">Continue with CAS</a>
-    </div>
   </nav>
 
   <!-- Masthead -->
@@ -68,12 +66,17 @@
     <div class="container">
       <div class="row">
         <div class="col-xl-9 mx-auto">
+        </br>
           <h1 class="mb-5">Welcome to TigerTravel!</h1>
+          </br>
+          </br>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4 mx-auto">
           <a class="btn btn-block btn-lg btn-primary" style="background-color:#ff8f00;border:none" href="{% url 'tigertravel-home' %}">Find Me Some Travellers &nbsp &nbsp<i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
+      </br>
+      </br>
       <div class="arrow bounce">
         <a class="fa fa-arrow-down fa-2x" ></a>
       </div>
@@ -86,30 +89,30 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-          	<div class="features-icons-icon d-flex">
-              <i class="fas fa-user-circle m-auto" style="color:#ff8f00;"></i>
-            </div>
-            <h3>Automatic Account Creation</h3>
-            <p class="lead mb-0">Access is verified through Princeton's Central Authentication Service and your account is created using TigerBook</p>
-          </div>
-           
-        </div>
-        <div class="col-lg-4">
-          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
              <div class="features-icons-icon d-flex">
               <i class="fas fa-car m-auto" style="color:#ff8f00;"></i>
             </div>
-            <h3>Effortless Matching</h3>
-            <p class="lead mb-0">Our algorithm will pair you with a group of up to 6 Princeton students going to the same location</p>
+            <h3 style="font-size: 24px">Effortless Matching</h3>
+            <p class="lead mb-0">Our algorithm will pair you with Princeton students going to and from the same location.</p>
           </div>
+        </div>
+         <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="fas fa-user-circle m-auto" style="color:#ff8f00;"></i>
+            </div>
+            <h3 style="font-size: 24px">Automatic Account Creation</h3>
+            <p class="lead mb-0">Your account is created using TigerBook and access is verified through CAS.</p>
+          </div>
+           
         </div>
         <div class="col-lg-4">
           <div class="features-icons-item mx-auto mb-0 mb-lg-3">
             <div class="features-icons-icon d-flex">
               <i class="fas fa-check-circle m-auto" style="color:#ff8f00;"></i>
             </div>
-            <h3>Easy to Use</h3>
-            <p class="lead mb-0">Delete and resubmit trip requests whenever convenient and view profiles of your co-passengers with ease!</p>
+            <h3 style="font-size: 24px">Easy to Use</h3>
+            <p class="lead mb-0">Control your trip requests with ease and receieve email notifications for updates!</p>
           </div>
         </div>
       </div>
@@ -152,6 +155,27 @@
       </div>
     </div>
   </section>
+  <!-- Call to Action -->
+  <section class="call-to-action text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h2 class="mb-4">Email us with more destination suggestions!</h2>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4 mx-auto">
+          <form>
+            <div class="form-row">
+              <div class="col-12 col-md-12">
+                <a class="btn btn-block btn-lg btn-primary" style="background-color:#314c75;border:none" href="mailto:tigertravel333@gmail.com?Subject=TigerTravel%20Destination%20Suggestion" target="_top">Email Us Now &nbsp &nbsp &nbsp <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <!-- Footer -->
   <footer class="footer bg-light">

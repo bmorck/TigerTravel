@@ -1,33 +1,114 @@
+<title>TigerTravel - My Profile</title>
 {% extends "tigertravel/base.html" %}
 {% block content %}
-	<div id="prof" class="content-section">
-     
-        <img class="rounded-circle account-img" src="https://tigerbook.herokuapp.com/images/name">
-        <div class="media-body">
-          <h2 class="account-heading">{{ user.person.name }}</h2>
-          <p class="text-secondary">{{ user.person.email }}</p>
-          <p class="text-secondary">{{ user.person.college }} College</p>
-          {% for post in object_list %}
-              {% if post.person == user %}
-                <a class="btn" href="{% url 'request-delete' post.id %}">Delete</a>
-                <h1>{{ post.name }}'s Trip on {{ post.date|date:"F d, Y" }}</h1>
-                <p>Departure Timeframe: {{ post.start_time }} - {{ post.end_time }} to {{ post.destination }}</p>
-                <p>Group {{ post.group_set.first.size}}</p>
+<div id="prof" class="content-section">
 
-        
-              {% endif %}
-          {% endfor %}
-        
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script>
-	var name= "{{ user.profile.get_display_id }}";
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>
+    var name= "{{ user.profile.get_display_id }}";
     $(function(){
-       $('#prof').find('img').each(function(){
-           var srcpath = $(this).attr('src');
-           srcpath = srcpath.replace('name',name);
-           $(this).attr('src',srcpath);
-       });
-    });
-</script>
+     $('#prof').find('img').each(function(){
+       var srcpath = $(this).attr('src');
+       srcpath = srcpath.replace('name',name);
+       $(this).attr('src',srcpath);
+     });
+   });
+ </script>
+ <hr>
+ <div class="container bootstrap snippet">
+  <div class="row">
+    <div class="col-sm-3">
+      <center><img class="rounded-circle account-img" style="width:148px;height:190px" src="https://tigerbook.herokuapp.com/images/name"></div></center>
+
+
+      <div class = "col-sm-9">
+        <br>
+        <br>
+        <h2 class = welcome>
+        Welcome Back, {{ user.person.name }}!</h2>
+      </br>
+      </br>
+
+        <h2 class = requests>
+        <i class="fas fa-angle-double-left"></i> &nbsp My Trips &nbsp <i class="fas fa-angle-double-right"></i></h2>
+      </div>
+    </div>
+  </br>
+  <div class="row">
+    <div class="col-sm-3"><!--left col-->
+
+      <ul class="list-group">
+        <li class="list-group-item text-muted">Profile</li>
+        <li class="list-group-item text-left"><span class="pull-left"><strong>Name</br></strong></span> {{ user.person.name }}</li>
+        <li class="list-group-item text-left"><span class="pull-left"><strong>Residential College</br></strong></span> {{ user.person.college }} </li>
+        <li class="list-group-item text-left"><span class="pull-left"><strong>Class Year</br></strong></span> {{ user.person.year }}</li>
+        <li class="list-group-item text-left"><span class="pull-left"><strong>TigerBook &nbsp <a href = "{{ user.person.tigerlink }}" target="_blank"><i class="fas fa-link"></i></a></br></strong></span></li>
+
+      </ul> 
+
+
+  </div><!--/col-3-->
+  <div class="col-sm-9">
+
+    <div class="row">
+      <div class="col">
+        <div class="col">
+          <div class="col">
+            <div class="col">
+              <div class="col">
+               <div class="col">
+                 <div class="col">
+                   <div class="scroller">
+                    
+                      {% for post in object_list %}
+
+
+
+                      {% if post.person == user %}
+                      <div class ="container" style="background-color: #ffc796; text-align: center; border:1px solid #d8780a; border-radius: 10px;">
+
+                        <h1 style="font-size:15px;"> {{ post.origin }}&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;{{ post.destination }} on {{ post.date|date:"F d, Y" }} <a class="btn" role="button" href="{% url 'request-delete' post.id %}" onclick="return popup('{% url 'request-delete' post.id %}')"><i class="fas fa-trash-alt"style="color: #ff8f00"></i></a></h1> 
+                        <p>Departure Timeframe: {{ post.start_time }} - {{ post.end_time }}</p>
+                        <script>
+                          function popup(url) {
+                            newwindow=window.open(url,'name','height=300,width=300');
+                            if (window.focus) {newwindow.focus()}
+                              return false;
+                          }
+                        </script>
+                        {% if post.group_set.first.size >= 2 %}
+                        <p><a href="{% url 'group-detail' post.group_set.first.id %}" style="text-decoration: underline;"><font color="green">Currently in a group of {{ post.group_set.first.size}} total members. Click here for group details.</font></a></p>
+                        {% endif %}
+
+                        {% if post.group_set.first.size == 1 %}
+                        <p><a href="{% url 'group-detail' post.group_set.first.id %}"><font color="red">No other students have joined this trip yet. Click here for group details.</font></a></p>
+                        {% endif %}
+
+                      </div>
+                      {% endif %}
+                      <center>
+
+
+
+
+                      <p></p>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!--/col-9-->
+</div><!--/row-->
+<script type="text/javascript">
+    document.getElementById('profile').classList.add('active');
+  </script>
 {% endblock content %}

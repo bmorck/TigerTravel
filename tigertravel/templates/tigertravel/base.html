@@ -5,169 +5,72 @@
 <html lang="en">
 
 <head>
-	<style>
-		.content-section {
-		  background: #ffffff;
-		  padding: 10px 20px;
-		  border: 1px solid #dddddd;
-		  border-radius: 3px;
-		  margin-bottom: 20px;
-		}
-
-		.article-title {
-		  color: #444444;
-		}
-
-		a.article-title:hover {
-		  color: #428bca;
-		  text-decoration: none;
-		}
-
-		.article-content {
-		  white-space: pre-line;
-		}
-
-		.article-img {
-		  height: 65px;
-		  width: 65px;
-		  margin-right: 16px;
-		}
-
-		.article-metadata {
-		  padding-bottom: 1px;
-		  margin-bottom: 4px;
-		  border-bottom: 1px solid #e3e3e3
-		}
-
-		.article-metadata a:hover {
-		  color: #333;
-		  text-decoration: none;
-		}
-
-		.article-svg {
-		  width: 25px;
-		  height: 25px;
-		  vertical-align: middle;
-		}
-	</style>
-
-	<meta charset="utf-8">
-
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-  	
-  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
-  	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/stylesheet.css' %}">
-
-<!--===============================================================================================-->
-
-	<link rel="icon" type="image/png" href="{% static 'tigertravel/images/icons/favicon.ico' %}"/>
-
-<!--===============================================================================================-->
-
 	
 
-<!--===============================================================================================-->
-
-	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
-
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Helvetica:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
-
-
-<!--===============================================================================================-->
-
-	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
-
-<!--===============================================================================================-->
-
-	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/fonts/iconic/css/material-design-iconic-font.min.css' %}">
-
-<!--===============================================================================================-->
-
-	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/vendor/animate/animate.css' %}">
-
-<!--===============================================================================================-->
-
-	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/vendor/css-hamburgers/hamburgers.min.css' %}">
-
-<!--===============================================================================================-->
-
-	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/vendor/animsition/css/animsition.min.css' %}">
-
-<!--===============================================================================================-->
-
-	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/vendor/select2/select2.min.css' %}">
-
-<!--===============================================================================================-->
-
-	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/vendor/daterangepicker/daterangepicker.css' %}">
-
-<!--===============================================================================================-->
-
-	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/css/util.css' %}">
-
-	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/css/main.css' %}">
-
-<!--===============================================================================================-->
-
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-  	<meta charset="utf-8">
+	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>Booking Form HTML Template</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/stylesheet.css' %}">
+	<link rel="icon" type="image/png" href="{% static 'tigertravel/images/icons/favicon.ico' %}"/>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Helvetica:400,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 
 
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="{% static 'tigertravel/css/style.css' %}" />
 
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
 
 
-	{% if title %}
 
-		<title>TigerTravel - {{ title }}</title>
+{% if title %}
 
-	{% else %}
+<title>TigerTravel - {{ title }}</title>
 
-		<title>TigerTravel</title>
+{% else %}
 
-	{% endif %}
+<title>TigerTravel</title>
+
+{% endif %}
 
 </head>
 
 <body>
-	<div class="row">
-	  <nav class="navbar navbar-light bg-light static-top" style = "position:fixed;top:0; width:100%; z-index: 100" >
-	    <div class="container">
-	      <a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a> 
-	      <a class="" href="{% url 'tigertravel-home' %}" id="groups">Find a Ride &nbsp <i class="far fa-hand-point-right"></i></a>
-	      <a class="" href="{% url 'tigertravel-groups' %}" id="groups">Active Groups &nbsp <i class="fas fa-layer-group"></i></a>
-	      <a class="" href="{% url 'tigertravel-listings' %}" id="listings">My Profile &nbsp <i class="fas fa-user"></i></a>
-	  </div>
-	  </nav>
-	</div>
+	<nav class="navbar navbar-light bg-light static-top" style = "position:fixed; top:0; width:100%; z-index: 100">
+		
+		<a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a> 
+		<ul>
+			<li><a href="{% url 'tigertravel-home' %}" id="home">Find a Ride &nbsp <i class="far fa-hand-point-right"></i></a></li>
+			<li><a href="{% url 'tigertravel-profile' %}" id="profile">My TigerTravel &nbsp <i class="fas fa-user"></i></a></li>
+		</ul>
+	</nav>
 	<div style="margin-top:80px">
-	{% if messages %}
+		{% if messages %}
 		{% for message in messages %}
-			<div class="alert alert-danger" role="alert" style="margin:0; border-radius:30px">
-				{{ message }}
-			</div>
+		<div class="alert alert-danger" role="alert" style="margin:0; border-radius:30px">
+			{{ message }}
+		</div>
 		{% endfor %}
-	{% endif%}
+		{% endif%}
 
 
-	{% block content %}{% endblock %}
+		{% block content %}{% endblock %}
 	</div>
 
 </body>

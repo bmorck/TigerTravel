@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+import json
 
 class Request(models.Model):
 	origin = models.CharField(max_length=50, default='PRINCETON')
@@ -12,7 +13,7 @@ class Request(models.Model):
 	name = models.CharField(max_length=50, default='person')
 
 	def get_absolute_url(self):
-		return reverse('tigertravel-listings')
+		return reverse('tigertravel-profile')
 
 
 class Group(models.Model):
@@ -23,5 +24,3 @@ class Group(models.Model):
 	end_time = models.TimeField()
 	members = models.ManyToManyField(Request)
 	size = models.CharField(max_length=50, default="1")
-
-
