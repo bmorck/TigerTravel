@@ -12,13 +12,13 @@
 					</div>
 					<div class="col-md-7 col-md-offset-1">
 						<div class="booking-form">
-							<form method="POST">
+							<form method="POST" class="validate-form">
 								{% csrf_token %}
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group validate-input">
 											<span class="form-label">From</span>
-											<select class="form-control" required id="id_origin">
+											<select name="origin" class="form-control" required id="id_origin">
 												<option value="PRINCETON">PRINCETON</option>
 												<option value="EWR">EWR</option>
 												<option value="JFK">JFK</option>
@@ -29,7 +29,7 @@
 									<div class="col-md-6">
 										<div class="form-group validate-input">
 											<span class="form-label">To</span>
-											<select class="form-control" required id="id_destination">
+											<select name="destination" class="form-control" required id="id_destination">
 												<option value="PRINCETON">PRINCETON</option>
 												<option value="EWR">EWR</option>
 												<option value="JFK">JFK</option>
@@ -43,19 +43,19 @@
 										<div class="col-md-4">
 											<div class="form-group validate-input">
 												<span class="form-label">Date</span>
-												<input class="form-control" type="date" required id="id_date">
+												<input name="date" class="form-control" type="date" required id="id_date">
 											</div>
 										</div>
 									<div class="col-md-4">
 										<div class="form-group validate-input">
 											<span class="form-label">Start Time</span>
-											<input class="form-control" type="time" required id="id_start_time">
+											<input name="start_time" class="form-control" type="time" required id="id_start_time">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<span class="form-label validate-input">End Time</span>
-											<input class="form-control" type="time" required id="id_end_time">
+											<input name="end_time" class="form-control" type="time" required id="id_end_time">
 										</div>
 									</div>
 									
