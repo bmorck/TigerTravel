@@ -16,9 +16,9 @@
 								{% csrf_token %}
 								<div class="row">
 									<div class="col-md-6">
-										<div class="form-group">
+										<div class="form-group validate-input">
 											<span class="form-label">From</span>
-											<select class="form-control">
+											<select class="form-control" required id="id_origin">
 												<option value="PRINCETON">PRINCETON</option>
 												<option value="EWR">EWR</option>
 												<option value="JFK">JFK</option>
@@ -27,9 +27,9 @@
 										</div>
 									</div>
 									<div class="col-md-6">
-										<div class="form-group">
+										<div class="form-group validate-input">
 											<span class="form-label">To</span>
-											<select class="form-control">
+											<select class="form-control" required id="id_destination">
 												<option value="PRINCETON">PRINCETON</option>
 												<option value="EWR">EWR</option>
 												<option value="JFK">JFK</option>
@@ -37,31 +37,32 @@
 											</select>
 										</div>
 									</div>
+									
 								</div>
 								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<span class="form-label">Date</span>
-											<input class="form-control" type="date" required>
+										<div class="col-md-4">
+											<div class="form-group validate-input">
+												<span class="form-label">Date</span>
+												<input class="form-control" type="date" required id="id_date">
+											</div>
 										</div>
-									</div>
 									<div class="col-md-4">
-										<div class="form-group">
+										<div class="form-group validate-input">
 											<span class="form-label">Start Time</span>
-											<input class="form-control" type="time" required>
+											<input class="form-control" type="time" required id="id_start_time">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
-											<span class="form-label">End Time</span>
-											<input class="form-control" type="time" required>
+											<span class="form-label validate-input">End Time</span>
+											<input class="form-control" type="time" required id="id_end_time">
 										</div>
 									</div>
 									
 								</div>
 								
 								<div class="form-btn">
-									<button class="submit-btn">Submit Request</button>
+									<button class="submit-btn" type="submit">Submit Request</button>
 								</div>
 							</form>
 						</div>
