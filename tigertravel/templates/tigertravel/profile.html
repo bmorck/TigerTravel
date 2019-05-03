@@ -76,14 +76,11 @@
                               return false;
                           }
                         </script>
-                        {% if post.group_set.first.size >= 2 %}
-                        <p><a href="{% url 'group-detail' post.group_set.first.id %}" style="text-decoration: underline;"><font color="green">Currently in a group of {{ post.group_set.first.size}} total members. Click here for group details.</font></a></p>
-                        {% endif %}
-
-                        {% if post.group_set.first.size == 1 %}
-                        <p><a href="{% url 'group-detail' post.group_set.first.id %}"><font color="red">No other students have joined this trip yet. Click here for group details.</font></a></p>
-                        {% endif %}
-
+                        
+                        <p><a href="{% url 'group-detail' post.group_set.first.id %}" style="text-decoration: underline;"><font color="black">Currently in a group of {{ post.group_set.first.size}} total members. Click here for group details.</font></a></p>
+                            
+                        
+                    
                       </div>
                       {% endif %}
                       <center>

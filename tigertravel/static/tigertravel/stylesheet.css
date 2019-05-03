@@ -3,25 +3,29 @@ body{
 }
 
 h2.welcome {
-	font-family: Open Sans;
-	font-weight: bold;
-	text-align: center;
+  font-family: Open Sans;
+  font-weight: bold;
+  text-align: center;
 }
 h2.requests {
-	font-family: Open Sans;
-	font-weight: bold;
+  font-family: Open Sans;
+  font-weight: bold;
   font-size: 26px;
-	text-align: center;
-	color: #ff8f00;
+  text-align: center;
+  color: #ff8f00;
 }
 .col-sm-8{
-	text-align: center;
+  text-align: center;
 }
 
 
 .scroller{
   overflow-y: scroll;
   height: 275px;
+}
+.scroller_chat{
+  overflow-y: scroll;
+  height: 500px;
 }
 
 
@@ -197,60 +201,59 @@ a.list-group-item, .list-group-item-action {
 
 
 a:link {
-	text-decoration: none;
+  text-decoration: none;
 }
 /* NAVIGATION */
 nav {
-	position:fixed;
-	top:0; 
-	width:100%; 
-	z-index: 100;
+  position:fixed;
+  top:0; 
+  width:100%; 
+  z-index: 100;
 }
 nav ul {
-	list-style: none;
-	text-align: right;
+  list-style: none;
+  text-align: right;
 }
 nav ul li {
-	display: inline-block;
+  display: inline-block;
 }
 nav ul li a {
-	display: block;
-	padding: 10px;
-	text-decoration: none;
-	color: #505050;
-	font-family: Helvetica;
-	margin: 0 10px;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #505050;
+  font-family: Helvetica;
+  margin: 0 10px;
 }
 nav ul li a,
 nav ul li a:after,
 nav ul li a:before {
-	transition: all .5s;
+  transition: all .5s;
 }
 nav ul li a:hover {
-	color: #ff8f00;
+  color: #ff8f00;
 }
 
 
 /* stroke */
 nav ul li a {
-	position: relative;
+  position: relative;
 }
 nav ul li a:after {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin: auto;
-	width: 0%;
-	content: '.';
-	color: transparent;
-	background: #ff8f00;
-	height: 1px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: #ff8f00;
+  height: 1px;
 }
 nav ul li a:hover:after {
-	width: 100%;
+  width: 100%;
 }
 nav ul li a.active {
-	color: #ff8f00;
+  color: #ff8f00;
 }
-

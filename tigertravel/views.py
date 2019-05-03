@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Request, Group
+from .models import Request, Group, Comment
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.contrib import messages
 import datetime
@@ -14,6 +14,9 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from django.contrib.auth.models import User
+from django.views.generic.edit import FormMixin
+from .forms import CommentForm
+from django.urls import reverse
 
 def login(request):
 	return render(request, 'tigertravel/login.html')
@@ -135,7 +138,7 @@ class RequestCreateView(CreateView):
 						send_mail(
 						'TigerTravel Group Update for ' + group.date.strftime("%B %d, %Y"),
 						message, 
-						'tigertravel333@gmail.com',
+						'TigerTravel <tigertravel333@gmail.com>',
 						email_list,
 						fail_silently=False,
 						)
@@ -155,7 +158,7 @@ class RequestCreateView(CreateView):
 			gmailPassword = '3Tiger3Travel3'
 			recipient = self.object.person.profile.get_display_id() + '@princeton.edu'
 			msg = MIMEMultipart()
-			msg['From'] = gmailUser
+			msg['From'] = 'TigerTravel <' + gmailUser + '>'
 			msg['To'] = recipient
 			msg['Subject'] = "New TigerTravel Group for " + new_group.date.strftime("%B %d, %Y")
 			message = 'Dear ' + self.request.user.person.name + ',\n\n' 'You have created a new group! You will be emailed when other people join. \n\nYour trip is scheduled from ' + new_group.origin + ' to ' + new_group.destination + ' on ' + new_group.date.strftime("%A %B %d, %Y") + '. ' + 'Departure is scheduled between ' + new_group.start_time.strftime('%I:%M %p') + ' and ' + new_group.end_time.strftime('%I:%M %p') + '.\n\nCheers!\n\nTigerTravel'
@@ -177,6 +180,7 @@ class RequestListView(ListView):
 	ordering = ['date']
 	template_name = 'tigertravel/profile.html'
 
+	#purpose of this was to access groups in html
 	def get_context_data(self, **kwargs):
 		context = super(RequestListView, self).get_context_data(**kwargs)
 		context['groups'] = Group.objects.all()
@@ -198,8 +202,30 @@ class GroupListView(ListView):
 
 		return super().get_context_data()
 
-class GroupDetailView(DetailView):
+class GroupDetailView(UpdateView):
 	model = Group
+	fields = ['text']
+
+
+	def get_success_url(self):
+		new_comment = Comment.objects.create(author=self.request.user.person.name, text=self.object.text)
+		new_comment.save()
+		self.object.comments.add(new_comment)
+		self.object.save()
+		return reverse('group-detail', kwargs={'pk': self.object.id})
+
+	def get_context_data(self, **kwargs):
+		context = super(GroupDetailView, self).get_context_data(**kwargs)
+		context['comments'] = Comment.objects.all()
+		return context
+
+	def form_valid(self, form):
+		form.instance.author = self.request.user
+		return super().form_valid(form)
+
+
+	
+
 
 class RequestDeleteView(DeleteView):
 	model = Request
@@ -249,7 +275,7 @@ class RequestDeleteView(DeleteView):
 
 		message, 
 
-		'tigertravel333@gmail.com',
+		'TigerTravel <tigertravel333@gmail.com>',
 
 		email_list,
 
