@@ -21,6 +21,7 @@
 
   <!-- Custom styles for this template -->
   <link href="{% static 'login/css/landing-page.min.css' %}" rel="stylesheet"> 
+  <link rel="stylesheet" type="text/css" href="{% static 'tigertravel/stylesheet.css' %}">
   <style>
     @bg: #2d2d37; // Dark blue
     @primary: #fd6b21; // Orange
@@ -55,10 +56,16 @@
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-light bg-light static-top" style = "position:fixed; top:0; width:100%; z-index: 100" >
+  <nav class="navbar navbar-light bg-light static-top w3-hide-small" style = "position:fixed; top:0; width:100%; z-index: 100" >
       <a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a>
       <a class="btn btn-primary" style="background-color:#ff8f00;border:none" href="{% url 'tigertravel-home' %}">Continue with CAS</a>
   </nav>
+  <!-- Navigation -->
+  <nav class="navbar navbar-light bg-light static-top w3-hide-large w3-hide-medium" style = "position:fixed; top:0; width:100%; z-index: 100" >
+      <a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 150px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a>
+      <a class="btn btn-primary" style="background-color:#ff8f00;border:none" href="{% url 'tigertravel-home' %}">Continue with CAS</a>
+  </nav>
+
 
   <!-- Masthead -->
   <header class="masthead text-white text-center">
@@ -93,18 +100,8 @@
               <i class="fas fa-car m-auto" style="color:#ff8f00;"></i>
             </div>
             <h3 style="font-size: 24px">Effortless Matching</h3>
-            <p class="lead mb-0">Our algorithm will pair you with Princeton students going to and from the same location.</p>
+            <p class="lead mb-0">Our algorithm will pair you with Princeton students going to and from the same locations.</p>
           </div>
-        </div>
-         <div class="col-lg-4">
-          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-            <div class="features-icons-icon d-flex">
-              <i class="fas fa-user-circle m-auto" style="color:#ff8f00;"></i>
-            </div>
-            <h3 style="font-size: 24px">Automatic Account Creation</h3>
-            <p class="lead mb-0">Your account is created using TigerBook and access is verified through CAS.</p>
-          </div>
-           
         </div>
         <div class="col-lg-4">
           <div class="features-icons-item mx-auto mb-0 mb-lg-3">
@@ -113,6 +110,15 @@
             </div>
             <h3 style="font-size: 24px">Easy to Use</h3>
             <p class="lead mb-0">Control your trip requests with ease and receieve email notifications for updates!</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="fas fa-comments m-auto" style="color:#ff8f00;"></i>
+            </div>
+            <h3 style="font-size: 24px">Group Chat</h3>
+            <p class="lead mb-0">Chat with your TigerTravel group members for fast and easy communication.</p>
           </div>
         </div>
       </div>
@@ -135,7 +141,7 @@
           <div class="testimonial-item mx-auto mb-5 mb-lg-0">
             <img class="img-fluid rounded-circle mb-3" src="{% static 'login/img/shaurya.png' %}" alt="">
             <h5>Shaurya Garg</h5>
-            <p class="font-weight-light mb-0">shaurya@princeton.edu </br> BSE Computer Science '21</p>
+            <p class="font-weight-light mb-0">shauryag@princeton.edu </br> BSE Computer Science '21</p>
           </div>
         </div>
         <div class="col-lg-3">

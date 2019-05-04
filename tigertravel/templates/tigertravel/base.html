@@ -11,12 +11,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="{% static 'tigertravel/stylesheet.css' %}">
-	<link rel="icon" type="image/png" href="{% static 'tigertravel/images/icons/favicon.ico' %}"/>
+	<link rel="icon" type="image/png" href="{% static 'tigertravel/images/icons/favicon.ico' %}">
 
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -54,17 +55,40 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-light bg-light static-top hidden-md-down" style = "position:fixed; top:0; width:100%; z-index: 100">
+	<nav class="navbar navbar-light bg-light static-top hidden-md-down w3-hide-small" style = "position:fixed; top:0; width:100%; z-index: 100">
 		
-		<a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a> 
+		<a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a> 
 		<ul>
 			<li><a href="{% url 'tigertravel-home' %}" id="home">Find a Ride &nbsp <i class="far fa-hand-point-right"></i></a></li>
-			
-			<li><a href="{% url 'tigertravel-groups' %}" id="groups">Active Groups &nbsp <i class="far fa-hand-point-right"></i></a></li>
 			<li><a href="{% url 'tigertravel-profile' %}" id="profile">My TigerTravel &nbsp <i class="fas fa-user"></i></a></li>
 		</ul>
 	</nav>
-	<div style="margin-top:80px">
+
+ <nav class="navbar navbar-light bg-light static-top w3-hide-large w3-hide-medium" style = "position:fixed; top:0; width:100%; z-index: 100" >
+      <a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="width: 150px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a>
+
+      <div class="w3-dropdown-click">
+      <button class="w3-button" onclick="drop()">
+        Menu <i class="fa fa-caret-down"></i>
+      </button>
+      <div id="demo" class="w3-dropdown-content w3-bar-block w3-card">
+        <a href="{% url 'tigertravel-home' %}" id="home" class="w3-bar-item w3-button">Find a Ride </a>
+        <a href="{% url 'tigertravel-profile' %}" id="profile" class="w3-bar-item w3-button">My TigerTravel</a>
+      </div>
+    </div>
+<script>
+function drop() {
+  var x = document.getElementById("demo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+  </nav>
+
+	<div style="margin-top:67px">
 		{% if messages %}
 		{% for message in messages %}
 		<div class="alert alert-danger" role="alert" style="margin:0; border-radius:30px">
