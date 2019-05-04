@@ -41,11 +41,9 @@ class RequestCreateView(CreateView):
 
 		if form.instance.start_time > form.instance.end_time:
 
-			if (form.instance.start_time.hour >= 12 and form.instance.end_time.hour >= 12) or (form.instance.start_time.hour < 12 and form.instance.end_time.hour < 12):
+			messages.error(self.request, 'Start time cannot be after end time!')
 
-				messages.error(self.request, 'Start time cannot be after end time!')
-
-				return redirect('tigertravel-home')
+			return redirect('tigertravel-home')
 
 
 

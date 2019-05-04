@@ -62,7 +62,7 @@
 		<a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a> 
 		<ul>
 			<li><a href="{% url 'tigertravel-home' %}" id="home">Find a Ride &nbsp <i class="far fa-hand-point-right"></i></a></li>
-			<li><a href="{% url 'tigertravel-profile' %}" id="profile">My TigerTravel &nbsp <i class="fas fa-user"></i></a></li>
+			<li><a href="{% url 'tigertravel-profile' %}" id="profile">My Profile &nbsp <i class="fas fa-user"></i></a></li>
 		</ul>
 	</nav>
 
@@ -70,23 +70,32 @@
       <a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="width: 150px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a>
 
       <div class="w3-dropdown-click">
-      <button class="w3-button" onclick="drop()">
-        Menu <i class="fa fa-caret-down"></i>
+      <button class="w3-button" onclick="openNav()">
+        <i style="color: #ff8f00" class="fas fa-bars"></i>
       </button>
-      <div id="demo" class="w3-dropdown-content w3-bar-block w3-card">
-        <a href="{% url 'tigertravel-home' %}" id="home" class="w3-bar-item w3-button">Find a Ride </a>
-        <a href="{% url 'tigertravel-profile' %}" id="profile" class="w3-bar-item w3-button">My TigerTravel</a>
+      <div id="demo" class="sidenav">
+      	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i style="color: #ff8f00" class="fas fa-times"></i></a>
+        <a href="{% url 'tigertravel-home' %}" id="home" class="w3-bar-item w3-button">Find a Ride</a>
+        <a href="{% url 'tigertravel-profile' %}" id="profile" class="w3-bar-item w3-button">My Profile</a>
+      
       </div>
     </div>
-<script>
-function drop() {
-  var x = document.getElementById("demo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
+	<script>
+	function drop() {
+	  var x = document.getElementById("demo");
+	  if (x.className.indexOf("w3-show") == -1) {
+	    x.className += " w3-show";
+	  } else { 
+	    x.className = x.className.replace(" w3-show", "");
+	  }
+	}
+
+	function openNav() {	
+	    demo.style.width = "50%";
+	}
+	function closeNav() {
+		demo.style.width = "0";
+	}
 </script>
   </nav>
 
