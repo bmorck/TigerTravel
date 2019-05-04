@@ -20,7 +20,7 @@
 
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
@@ -35,6 +35,8 @@
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  
 </head>
 
 
@@ -52,7 +54,7 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-light bg-light static-top" style = "position:fixed; top:0; width:100%; z-index: 100">
+	<nav class="navbar navbar-light bg-light static-top hidden-md-down" style = "position:fixed; top:0; width:100%; z-index: 100">
 		
 		<a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a> 
 		<ul>

@@ -19,6 +19,7 @@ class Request(models.Model):
 class Comment(models.Model):
     author = models.CharField(max_length=200)
     text = models.TextField(default="message")
+    sendtime = models.TimeField()
     
 
 class Group(models.Model):

@@ -1,6 +1,12 @@
-<title>My Group</title>
+<title>TigerTravel - My Group</title>
 {% extends "tigertravel/base.html" %}
 {% block content %}
+
+
+{% for member in object.members.all %}
+ 
+ {% if user.profile.get_display_id == member.person.profile.get_display_id %}
+  
 <div id="prof" class="content-section">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -18,8 +24,7 @@
   <div class="col-sm-12">
     </br>
     <h2 class = welcome>
-    Your TigerTravel Group</h2>
-  </br>
+    Your TigerTravel Group for {{ object.date|date:"F d, Y" }}</h2>
 </div>
 
 </br>
@@ -29,11 +34,9 @@
 
     <ul class="list-group">
       <li class="list-group-item text-muted">Trip Information</li>
-      <li class="list-group-item text-left"><span class="pull-left"><strong>Origin</br></strong></span> {{ object.origin }} </li>
-      <li class="list-group-item text-left"><span class="pull-left"><strong>Destination</br></strong></span> {{ object.destination }} </li>
-      <li class="list-group-item text-left"><span class="pull-left"><strong>Date</br></strong></span> {{ object.date|date:"F d, Y" }}</li>
-      <li class="list-group-item text-left"><span class="pull-left"><strong>Time of Departure</br></strong></span> {{ object.start_time }} <i class="fas fa-arrow-right"></i>{{ object.end_time }}</li>
-      <li class="list-group-item text-left"><span class="pull-left"><strong>Members</br></strong></span> <p>{% for member in object.members.all %} {{ member.name }} {% endfor %}</p>
+      <li class="list-group-item text-left"><span class="pull-left"><strong><i class="fas fa-route"></i> &nbsp Route</br></strong></span> {{ object.origin }} <i class="fas fa-arrow-right"></i>{{ object.destination }} </li>
+      <li class="list-group-item text-left"><span class="pull-left"><strong><i class="fas fa-clock"></i> &nbsp Time of Departure</br></strong></span> {{ object.start_time }} <i class="fas fa-arrow-right"></i>{{ object.end_time }}</li>
+      <li class="list-group-item text-left"><span class="pull-left"><strong><i class="fas fa-user-friends"></i>Members</br></strong></span> <p>{% for member in object.members.all %} {{ member.name }} {% endfor %}</p>
         {% for member in object.members.all %} 
     <a href="{{member.person.person.tigerlink}}"><img id="{{ member.person.profile.get_display_id }}" style="width: 50px; height: 65px" class="rounded-circle account-img" src="{{member.person.person.piclink}}"></a>
 
@@ -53,22 +56,32 @@
               <div class="col">
                <div class="col">
                  <div class="col">
+                  <h2 class = requests>Group Chat</h2></br>
                    <div class="scroller_chat">
                     {% for comment in object.comments.all %} 
-                    <div class ="container" id="comments1" style="background-color: #ffc796; text-align: center; border:1px solid #d8780a; border-radius: 10px;">
-                      <p>
-                        {{ comment.author}}: {{ comment.text }}
-    
 
-                      </p>
+                    {% if comment.author == user.person.name %}
+                    <div class ="container" id="comments1" style="background-color: #ff9c45; text-align: right; border:1px solid #d8780a; border-radius: 10px; width: 80%; float: right;">
+                       <p style="margin: 0;">{{ comment.text }}</p> <p style="margin: 0;" class="text-muted">{{ comment.sendtime }}</p>
                       
                      </div></br>
+
+                     {% else %}
+                     <div class ="container" id="comments1" style="background-color: #ffc796; text-align: left; border:1px solid #d8780a; border-radius: 10px; width: 80%; float: left;">
+                       <p style="margin: 0;">{{ comment.author }}: {{ comment.text }}</p> <p style="margin: 0;" class="text-muted">{{ comment.sendtime }}</p>
+
+                      
+                     </div></br>
+
+                     {% endif %}
+                   </br></br>
                       {% endfor %}
                        </div>
+                     </br>
                     <form method="POST">
                       {% csrf_token %}
-                      <input type="text" name="text" required id="text"></input>
-                      <button type="submit">Send</button>
+                      <input type="text" name="text" style="width: 90%" placeholder="Type your message" maxlength="50" required id="text"></input>
+                      <button style="color: #ff8f00; margin-right: 0" type="submit"><i class="fas fa-paper-plane"></i></button>
                     </form>
                  
                
@@ -94,5 +107,12 @@
   document.getElementById('profile').classList.add('active');
 </script>
 
-{% endblock content %}
 
+
+{% endif %}
+{% endfor %}
+
+
+
+
+{% endblock content %}

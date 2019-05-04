@@ -142,7 +142,7 @@ class RequestCreateView(CreateView):
 						email_list,
 						fail_silently=False,
 						)
-						break
+						return reverse('group-detail', kwargs={'pk': group.id})
 
 		# if no group intersects, create new one
 		if changed == False:
@@ -171,6 +171,7 @@ class RequestCreateView(CreateView):
 			mailServer.login(gmailUser, gmailPassword)
 			mailServer.sendmail(gmailUser, recipient, msg.as_string())
 			mailServer.close()
+			return reverse('group-detail', kwargs={'pk': new_group.id})
 
 		return super().get_success_url()
 
@@ -208,7 +209,7 @@ class GroupDetailView(UpdateView):
 
 
 	def get_success_url(self):
-		new_comment = Comment.objects.create(author=self.request.user.person.name, text=self.object.text)
+		new_comment = Comment.objects.create(author=self.request.user.person.name, text=self.object.text, sendtime=datetime.datetime.now(pytz.timezone('US/Eastern')))
 		new_comment.save()
 		self.object.comments.add(new_comment)
 		self.object.save()
@@ -287,13 +288,3 @@ class RequestDeleteView(DeleteView):
 			group.delete()
 
 		return super(RequestDeleteView, self).delete(*args, **kwargs)
-
-
-
-
-
-
-
-
-
-		
