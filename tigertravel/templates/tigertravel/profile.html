@@ -60,27 +60,21 @@
                     
                       {% for post in object_list %}
 
+
                       {% if post.person == user %}
+                     
                       <div class ="container" style="background-color: #ffc796; text-align: center; border:1px solid #d8780a; border-radius: 10px;">
 
-                        <h1 style="font-size:15px;"> {{ post.origin }}&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;{{ post.destination }} on {{ post.date|date:"F d, Y" }} <a class="btn" role="button" href="#" onclick="myFunction()"><i class="fas fa-minus-circle" style="color: red; font-size: 20px"></i><form id="delete_request" method="post" action="{% url 'request-delete' post.id %}" >{% csrf_token %}
-                          </form></a></h1> 
-                        <p>Departure Timeframe: {{ post.group_set.first.start_time }} - {{ post.group_set.first.end_time }}</p>
-                        <script>
-                          function myFunction() {
-  var txt;
-  if (confirm("Are you sure you want to delete this request?")) {
-    document.getElementById("delete_request").submit();;
-  } else {
-    
-  }
-}
-                        </script>
+                        <h1 style="font-size:15px; padding-top: 5px"> {{ post.origin }}&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;{{ post.destination }} on {{ post.date|date:"F d, Y" }}</h1> 
+                        Departure Timeframe: {{ post.group_set.first.start_time }} - {{ post.group_set.first.end_time }}
+                      </br>
+                        
+
                         {% if post.group_set.first.size == '1' %}
-                        <p><a href="{% url 'group-detail' post.group_set.first.id %}" style="text-decoration: underline;"><font color="red">No other students have joined this trip yet. Tap for group details.</font></a></p>
+                        <p><a href="{% url 'group-detail' post.group_set.first.id %}" style="text-decoration: underline;"><font color="red">No other students have joined this trip yet. Tap for details.</font></a></p>
 
                         {% else %}
-                        <p><a href="{% url 'group-detail' post.group_set.first.id %}" style="text-decoration: underline;"><font color="blue">Currently in a group of {{ post.group_set.first.size}} total members. Tap for group details.</font></a></p>
+                        <p><a href="{% url 'group-detail' post.group_set.first.id %}" style="text-decoration: underline;"><font color="blue">Currently in a group of {{ post.group_set.first.size}} total members. Tap for details.</font></a></p>
 
                         {% endif %}
                             
@@ -118,24 +112,15 @@
                       {% if post.person == user %}
                       <div class ="container" style="background-color: #ffc796; text-align: center; border:1px solid #d8780a; border-radius: 10px;">
 
-                        <h1 style="font-size:15px;"> {{ post.origin }}&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;{{ post.destination }} on {{ post.date|date:"F d, Y" }} <a class="btn" role="button" href="#" onclick="myFunction()"><i class="fas fa-minus-circle" style="color: red; font-size: 20px"></i><form id="delete_request" method="post" action="{% url 'request-delete' post.id %}" >{% csrf_token %}
-                          </form></a></h1> 
-                        <p>Departure Timeframe: {{ post.group_set.first.start_time }} - {{ post.group_set.first.end_time }}</p>
-                        <script>
-                          function myFunction() {
-  var txt;
-  if (confirm("Are you sure you want to delete this request?")) {
-    document.getElementById("delete_request").submit();;
-  } else {
-    
-  }
-}
-                        </script>
+                        <h1 style="font-size:15px; padding-top: 5px"> {{ post.origin }}&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;{{ post.destination }} on {{ post.date|date:"F d, Y" }}</h1> 
+                        Departure Timeframe: {{ post.group_set.first.start_time }} - {{ post.group_set.first.end_time }}
+                      </br>
+                        
                         {% if post.group_set.first.size == '1' %}
-                        <p><a href="{% url 'group-detail' post.group_set.first.id %}" style="text-decoration: underline;"><font color="red">No other students have joined this trip yet. Click for group details.</font></a></p>
+                        <p><a href="{% url 'group-detail' post.group_set.first.id %}" style="text-decoration: underline;"><font color="red">No other students have joined this trip yet. Click for details.</font></a></p>
 
                         {% else %}
-                        <p><a href="{% url 'group-detail' post.group_set.first.id %}" style="text-decoration: underline;"><font color="blue">Currently in a group of {{ post.group_set.first.size}} total members. Click for group details.</font></a></p>
+                        <p><a href="{% url 'group-detail' post.group_set.first.id %}" style="text-decoration: underline;"><font color="blue">Currently in a group of {{ post.group_set.first.size}} total members. Click for details.</font></a></p>
 
                         {% endif %}
                             
@@ -165,6 +150,16 @@
 
   </div><!--/col-9-->
 </div><!--/row-->
+<script>
+                          function myFunction() {
+  var txt;
+  if (confirm("Are you sure you want to delete this request?")) {
+    document.getElementById("delete_request").submit();;
+  } else {
+    
+  }
+}
+                        </script>
 <script type="text/javascript">
     document.getElementById('profile').classList.add('active');
   </script>

@@ -27,7 +27,7 @@ SECRET_KEY = 'kc+!&_7jtgbq$g4!ue2-cww4%*cs-ni^@x+gmhytf438y&6k2s'
 #SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['tiger-travel.herokuapp.com']
 
@@ -138,7 +138,7 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-
+SECURE_SSL_REDIRECT = True
 
 LOGIN_URL = "/accounts/login/"
 UNIAUTH_LOGIN_DISPLAY_STANDARD = False
