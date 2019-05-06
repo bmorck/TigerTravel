@@ -21,6 +21,7 @@
 
   <!-- Custom styles for this template -->
   <link href="{% static 'login/css/landing-page.min.css' %}" rel="stylesheet"> 
+  <link href="{% static 'tigertravel/stylesheet.css' %}" rel="stylesheet">
   
   <style>
     @bg: #2d2d37; // Dark blue
@@ -59,7 +60,7 @@
   <nav class="navbar navbar-light bg-light static-top w3-hide-small" style = "position:fixed; top:0; width:100%; z-index: 100" >
       <a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 200px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a>
       <a class="btn btn-primary" style="background-color:#ff8f00;border:none" href="{% url 'tigertravel-home' %}">Continue with CAS</a>
-  </nav>
+  </nav> 
   <!-- Navigation -->
   <nav class="navbar navbar-light bg-light static-top w3-hide-large w3-hide-medium" style = "position:fixed; top:0; width:100%; z-index: 100" >
       <a class="navbar-brand" href="{% url 'tigertravel-login' %}"><img style="   width: 150px;" src="{% static 'tigertravel/images/trans.png' %}" alt="Logo"></a>
