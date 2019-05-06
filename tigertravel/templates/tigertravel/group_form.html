@@ -33,18 +33,19 @@
     <div class="col-sm-3 w3-hide-small"><!--left col-->
 
       <ul class="list-group">
+        <a class="btn" style="background-color: #ff8f00; color: white; margin: auto; vertical-align: middle;padding: 0 5px; height: 30px;" role="button" href="#" onclick="myFunction()"> &nbspLeave Group &nbsp <i class="fas fa-window-close"></i><form id="delete_request" method="post" action="{% url 'request-delete' member.id %}" >{% csrf_token %}
+                          </form></a> </br>
         <li class="list-group-item text-muted">Trip Information </li>
         <li class="list-group-item text-left"><span class="pull-left"><strong><i class="fas fa-route"></i> &nbsp Route</br></strong></span> {{ object.origin }} <i class="fas fa-arrow-right"></i>{{ object.destination }} </li>
         <li class="list-group-item text-left"><span class="pull-left"><strong><i class="fas fa-calendar-day"></i> &nbsp Date</br></strong></span> {{ object.date|date:"F d, Y" }}</li>
         <li class="list-group-item text-left"><span class="pull-left"><strong><i class="fas fa-clock"></i> &nbsp Time of Departure</br></strong></span> {{ object.start_time }} <i class="fas fa-arrow-right"></i>{{ object.end_time }}</li>
         <li class="list-group-item text-left"><span class="pull-left"><strong><i class="fas fa-user-friends"></i>Members</br></strong></span> <p>{% for member in object.members.all %}<a href="{{member.person.person.tigerlink}}" target="_blank"><img id="{{ member.person.profile.get_display_id }}" style="width: 20px; height: 26px" class="rounded-circle account-img" src="{{member.person.person.piclink}}"></a> &nbsp {{ member.name }} </br>{% endfor %}</p></li></br>
 
-          <a class="btn" style="background-color: #ff8f00; color: white; margin: auto; vertical-align: middle;padding: 0 5px; height: 30px;" role="button" href="#" onclick="myFunction()">Leave Group &nbsp <i class="fas fa-window-close"></i><form id="delete_request" method="post" action="{% url 'request-delete' member.id %}" >{% csrf_token %}
-                          </form></a>
+          
                        
 
 
-        </ul> </br>
+        </ul>
 
 
       </div><!--/col-3-->
@@ -66,7 +67,6 @@
 <script>
 var coll = document.getElementsByClassName("collapsible");
 var i;
-
 for (i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
     this.classList.toggle("active");
