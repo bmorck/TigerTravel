@@ -21,7 +21,7 @@
    });
  </script>
  <hr>
- <div class="col-sm-12">
+ <div class="col-sm-12 w3-hide-small">
  </br>
  <h2 class = welcome>
  Your TigerTravel Group </h2>
@@ -52,7 +52,7 @@
 
       <div class="col-sm-3 w3-hide-large w3-hide-medium"><!--left col-->
 
-        <button class="collapsible">Trip Information</button>
+        <button class="collapsible" style="font-size: 25px">Your TigerTravel Group</button>
         <div class="colcontent">
       <ul class="list-group">
         
@@ -73,7 +73,6 @@
       
                  
     }   
-
     </script> 
 
 
@@ -100,7 +99,7 @@ for (i = 0; i < coll.length; i++) {
         <div class="row">
          <div class="col">
           <h2 class = requests><i class="fas fa-comments"></i> &nbsp Group Chat &nbsp</h2></br>
-          <div id ="comments1" class="scroller_chat">
+          <div id ="comments1" class="scroller_chat" style="height: 230px;">
             {% for comment in object.comments.all %} 
 
             {% if comment.author == user.person.name %}

@@ -130,9 +130,18 @@ class RequestCreateView(CreateView):
 						email_list = []
 
 						for member in group.members.all():
-							email_list.append(member.person.profile.get_display_id() + '@princeton.edu')
+							if member != self.object:
+								email_list.append(member.person.profile.get_display_id() + '@princeton.edu')
 
-						message = 'Your group has been changed! ' + self.object.person.profile.get_display_id() + ' has joined your trip from ' + group.origin + ' to ' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '. Departure is now scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p') + '.\n\nCheers!\n\nTigerTravel'
+						email_list1 = [self.object.person.profile.get_display_id() + '@princeton.edu']
+
+						message_self = 'Dear ' + self.request.user.person.name + ',\n\nYou have joined a group! \n\nYour trip is scheduled from ' + group.origin + ' to ' + group.destination + ' on ' + group.date.strftime("%A %B %d, %Y") + '. ' + 'Departure is scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p') + '. \n\nYou can access your group page at https://tiger-travel.herokuapp.com/groups/' + str(group.id) + '.\n\nCheers!\n\nTigerTravel'
+			
+						send_mail('TigerTravel Group for ' + group.date.strftime("%B %d, %Y"), message_self, 'TigerTravel <tigertravel333@gmail.com>', 
+							email_list1, fail_silently=False,
+						)
+
+						message = 'Dear TigerTraveller, \n\nYour group has been changed! ' + self.request.user.person.name + ' has joined your trip from ' + group.origin + ' to ' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '. Departure is now scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p') + '. \n\nYou can access your group page at https://tiger-travel.herokuapp.com/groups/' + str(group.id) + '.\n\nCheers!\n\nTigerTravel'
 						send_mail(
 						'TigerTravel Group Update for ' + group.date.strftime("%B %d, %Y"),
 						message, 
@@ -140,6 +149,9 @@ class RequestCreateView(CreateView):
 						email_list,
 						fail_silently=False,
 						)
+
+						
+						
 						return reverse('group-detail', kwargs={'pk': group.id})
 
 		# if no group intersects, create new one
@@ -159,7 +171,7 @@ class RequestCreateView(CreateView):
 			msg['From'] = 'TigerTravel <' + gmailUser + '>'
 			msg['To'] = recipient
 			msg['Subject'] = "New TigerTravel Group for " + new_group.date.strftime("%B %d, %Y")
-			message = 'Dear ' + self.request.user.person.name + ',\n\n' 'You have created a new group! You will be emailed when other people join. \n\nYour trip is scheduled from ' + new_group.origin + ' to ' + new_group.destination + ' on ' + new_group.date.strftime("%A %B %d, %Y") + '. ' + 'Departure is scheduled between ' + new_group.start_time.strftime('%I:%M %p') + ' and ' + new_group.end_time.strftime('%I:%M %p') + '.\n\nCheers!\n\nTigerTravel'
+			message = 'Dear ' + self.request.user.person.name + ',\n\nYou have created a new group! You will be emailed when other people join. \n\nYour trip is scheduled from ' + new_group.origin + ' to ' + new_group.destination + ' on ' + new_group.date.strftime("%A %B %d, %Y") + '. ' + 'Departure is scheduled between ' + new_group.start_time.strftime('%I:%M %p') + ' and ' + new_group.end_time.strftime('%I:%M %p') + '. \n\nYou can access your group page at https://tiger-travel.herokuapp.com/groups/' + str(new_group.id) + '.\n\nCheers!\n\nTigerTravel'
 			msg.attach(MIMEText(message))
 
 			mailServer = smtplib.SMTP('smtp.gmail.com', 587)
@@ -266,11 +278,11 @@ class RequestDeleteView(DeleteView):
 			if member != self.get_object():
 				email_list.append(member.person.profile.get_display_id() + '@princeton.edu')
 
-		message = 'Your group has been changed! ' + self.get_object().person.profile.get_display_id() + ' has left your trip from ' + group.origin + 'to' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '!\nDeparture is now scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p')
+		message = 'Dear TigerTraveller,\n\nYour group has been changed! ' + self.request.user.person.name + ' has left your trip from ' + group.origin + ' to ' + group.destination + ' on ' + group.date.strftime("%A %d, %B %Y") + '. Departure is now scheduled between ' + group.start_time.strftime('%I:%M %p') + ' and ' + group.end_time.strftime('%I:%M %p') + '. \n\nYou can access your group page at https://tiger-travel.herokuapp.com/groups/' + str(group.id) + '.\n\nCheers!\n\nTigerTravel'
 
 		send_mail(
 
-		'Your TigerTravel Group', 
+		'TigerTravel Group Update for ' + group.date.strftime("%B %d, %Y"), 
 
 		message, 
 
