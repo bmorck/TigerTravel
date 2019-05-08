@@ -153,7 +153,7 @@ EMAIL_PORT = 587
 
 EMAIL_HOST_USER = 'tigertravel333@gmail.com'
 
-EMAIL_HOST_PASSWORD = '3Tiger3Travel3'
+EMAIL_HOST_PASSWORD = 'TigerTravelTravelTogether333'
 
 EMAIL_USE_SSL = False
 

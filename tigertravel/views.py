@@ -169,7 +169,7 @@ class RequestCreateView(CreateView):
 			new_group.save()
 
 			gmailUser = 'tigertravel333@gmail.com'
-			gmailPassword = '3Tiger3Travel3'
+			gmailPassword = 'TigerTravelTravelTogether333'
 			recipient = self.object.person.profile.get_display_id() + '@princeton.edu'
 			msg = MIMEMultipart()
 			msg['From'] = 'TigerTravel <' + gmailUser + '>'
