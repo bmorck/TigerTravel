@@ -75,7 +75,7 @@ class RequestCreateView(CreateView):
 					form.instance.name = self.request.user.person.name
 					return super().form_valid(form)
 
-				elif form.instance.date.day == datetime.datetime.now().day:
+				elif form.instance.date.day == datetime.datetime.now(pytz.timezone('US/Eastern')).day:
 					if form.instance.start_time > datetime.datetime.now(pytz.timezone('US/Eastern')).time():
 						form.instance.person = self.request.user
 						form.instance.name = self.request.user.person.name
@@ -102,10 +102,14 @@ class RequestCreateView(CreateView):
 	def get_success_url(self):
 		for group in Group.objects.all():
 			if group.date < datetime.datetime.now(pytz.timezone('US/Eastern')).date():
+				for request in group.members.all():
+					request.delete()
 				group.delete()
 
 			elif group.date == datetime.datetime.now(pytz.timezone('US/Eastern')).date():
 				if group.start_time < datetime.datetime.now(pytz.timezone('US/Eastern')).time():
+					for request in group.members.all():
+						request.delete()
 					group.delete()
 
 		changed = False
