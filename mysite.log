@@ -1,0 +1,76 @@
+[11/May/2019 02:14:14] ERROR [django.request:228] Internal Server Error: /
+Traceback (most recent call last):
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/c/users/bobby/desktop/cos 333/tigertravel/tigertravel/views.py", line 22, in login
+    return render(request, 'tigertravel/login.html')
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/templatetags/static.py", line 106, in render
+    url = self.url(context)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/templatetags/static.py", line 103, in url
+    return self.handle_simple(path)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/templatetags/static.py", line 118, in handle_simple
+    return staticfiles_storage.url(path)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/contrib/staticfiles/storage.py", line 152, in url
+    return self._url(self.stored_name, name, force)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/contrib/staticfiles/storage.py", line 131, in _url
+    hashed_name = hashed_name_func(*args)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/contrib/staticfiles/storage.py", line 419, in stored_name
+    raise ValueError("Missing staticfiles manifest entry for '%s'" % clean_name)
+ValueError: Missing staticfiles manifest entry for 'login/vendor/bootstrap/css/bootstrap.min.css'
+[11/May/2019 02:14:14] ERROR [django.server:154] "GET / HTTP/1.1" 500 27
+[11/May/2019 05:54:15] ERROR [django.request:228] Internal Server Error: /
+Traceback (most recent call last):
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/c/users/bobby/desktop/cos 333/tigertravel/tigertravel/views.py", line 22, in login
+    return render(request, 'tigertravel/login.html')
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/templatetags/static.py", line 106, in render
+    url = self.url(context)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/templatetags/static.py", line 103, in url
+    return self.handle_simple(path)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/templatetags/static.py", line 118, in handle_simple
+    return staticfiles_storage.url(path)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/contrib/staticfiles/storage.py", line 152, in url
+    return self._url(self.stored_name, name, force)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/contrib/staticfiles/storage.py", line 131, in _url
+    hashed_name = hashed_name_func(*args)
+  File "/mnt/c/users/bobby/desktop/cos 333/TigerTravel/tiger1/lib/python3.6/site-packages/django/contrib/staticfiles/storage.py", line 419, in stored_name
+    raise ValueError("Missing staticfiles manifest entry for '%s'" % clean_name)
+ValueError: Missing staticfiles manifest entry for 'login/vendor/bootstrap/css/bootstrap.min.css'
+[11/May/2019 05:54:16] ERROR [django.server:154] "GET / HTTP/1.1" 500 27

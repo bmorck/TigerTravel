@@ -138,7 +138,6 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-SECURE_SSL_REDIRECT = True
 
 LOGIN_URL = "/accounts/login/"
 UNIAUTH_LOGIN_DISPLAY_STANDARD = False
